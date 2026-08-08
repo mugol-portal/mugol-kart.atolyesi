@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MuGöl Kart Atölyesi — Kişiye Özel Dijital Tebrik Kartı</title>
+<meta name="description" content="Doğum günü, yeni yıl, teşekkür ve daha fazlası için saniyeler içinde kişiye özel dijital tebrik kartı hazırla, indir ve paylaş.">
+<meta property="og:title" content="MuGöl Kart Atölyesi — Kişiye Özel Dijital Tebrik Kartı">
+<meta property="og:description" content="Doğum günü, yeni yıl, teşekkür ve daha fazlası için saniyeler içinde kişiye özel dijital tebrik kartı hazırla, indir ve paylaş.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* MuGöl Kart Atölyesi — ortak tasarım sistemi */
+
+:root{
+  /* açık tema paleti */
+  --night:#FFFFFF;
+  --night-2:#FBF8F2;
+  --night-3:#F5EFE3;
+  --paper:#241F33;
+  --coral:#E4572E;
+  --gold:#C99B2E;
+  --mint:#3E8E7E;
+  --sky:#2E8FB0;
+  --lilac:#8B6BC7;
+  --rose:#E85D82;
+
+  --accent:var(--coral);
+  --accent-2:var(--gold);
+
+  --ink-rgb:36,31,51;
+  --shadow-rgb:120,100,70;
+
+  --line:rgba(var(--ink-rgb),0.12);
+  --line-strong:rgba(var(--ink-rgb),0.22);
+  --dim:rgba(var(--ink-rgb),0.66);
+  --dimmer:rgba(var(--ink-rgb),0.46);
+
+  --r-sm:12px;
+  --r-md:18px;
+  --r-lg:26px;
+  --shadow:0 30px 70px -30px rgba(var(--shadow-rgb),0.28);
+  --ease:cubic-bezier(.2,1,.3,1);
+}
+
+*{ box-sizing:border-box; }
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:'Nunito', system-ui, sans-serif;
+  color:var(--paper);
+  background:
+    radial-gradient(900px 600px at 88% -10%, color-mix(in oklab, var(--accent-2) 18%, transparent), transparent 60%),
+    radial-gradient(800px 600px at 0% 100%, color-mix(in oklab, var(--mint) 14%, transparent), transparent 60%),
+    var(--night);
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:radial-gradient(rgba(var(--ink-rgb),0.055) 1px, transparent 1px);
+  background-size:22px 22px;
+  mask-image:radial-gradient(circle at 50% 30%, #000, transparent 78%);
+}
+
+a{ color:inherit; }
+
+.wrap{
+  position:relative; z-index:2;
+  max-width:1180px;
+  margin:0 auto;
+  padding:34px 22px 90px;
+}
+
+/* ---------- header ---------- */
+.top{
+  display:flex; align-items:center; justify-content:center;
+  gap:16px;
+  padding:14px 22px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  background:rgba(var(--ink-rgb),0.04);
+  backdrop-filter:blur(10px);
+  margin-bottom:54px;
+  width:fit-content;
+  margin-left:auto; margin-right:auto;
+}
+.brandmark{
+  display:inline-flex; align-items:center; gap:9px;
+  font-weight:900; font-size:15px; letter-spacing:.01em;
+  text-decoration:none; color:var(--paper);
+}
+.brandmark .dot{
+  width:22px; height:22px; border-radius:8px;
+  background:linear-gradient(135deg, var(--coral), var(--gold));
+  display:grid; place-items:center; font-size:12px;
+  box-shadow:0 6px 18px -6px var(--coral);
+}
+.top nav{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.top nav a{
+  font-size:12.5px; font-weight:700; text-decoration:none;
+  color:var(--dim); padding:7px 12px; border-radius:100px;
+  transition:.2s var(--ease);
+}
+.top nav a:hover{ color:var(--paper); background:rgba(var(--ink-rgb),0.08); }
+.top nav a.active{ color:var(--night); background:var(--paper); }
+
+/* ---------- hero ---------- */
+.hero{ max-width:760px; margin:0 auto 58px; text-align:center; }
+.pill{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+  background:color-mix(in oklab, var(--gold) 12%, transparent);
+  padding:6px 13px; border-radius:100px; margin-bottom:22px;
+}
+h1{
+  font-weight:900;
+  font-size:clamp(38px, 7vw, 66px);
+  line-height:1.04; letter-spacing:-0.02em;
+  margin:0 0 18px;
+}
+h1 em{
+  font-style:normal;
+  background:linear-gradient(100deg, var(--coral), var(--gold) 55%, var(--mint));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+p.lede{
+  font-size:17px; line-height:1.75; color:var(--dim); margin:0 auto;
+  max-width:560px;
+}
+
+.stats{
+  display:flex; gap:34px; flex-wrap:wrap; margin-top:34px;
+  justify-content:center;
+}
+.stats div{ text-align:center; }
+.stats div b{ display:block; font-size:24px; font-weight:900; }
+.stats div span{ font-size:11.5px; color:var(--dimmer); letter-spacing:.06em; text-transform:uppercase; }
+
+/* ---------- gallery ---------- */
+.section-head{
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:14px; flex-wrap:wrap; margin:0 0 20px;
+}
+.section-head h2{ font-size:19px; font-weight:900; margin:0; }
+.section-head span{ font-size:13px; color:var(--dimmer); }
+
+.gallery{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+}
+@media (max-width:900px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:580px){ .gallery{ grid-template-columns:1fr; } }
+
+.type-card{
+  display:block; text-decoration:none; color:inherit;
+  background:linear-gradient(180deg, var(--night-3), var(--night-2));
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  overflow:hidden; position:relative;
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);
+}
+.type-card::after{
+  content:''; position:absolute; inset:0; border-radius:inherit; padding:1px;
+  background:linear-gradient(135deg, var(--c1), transparent 40%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  opacity:0; transition:opacity .35s var(--ease); pointer-events:none;
+}
+.type-card:hover{
+  transform:translateY(-8px) scale(1.01);
+  border-color:var(--line-strong);
+  box-shadow:0 36px 80px -30px color-mix(in oklab, var(--c1) 55%, black);
+}
+.type-card:hover::after{ opacity:1; }
+.type-card .banner{
+  height:140px; display:grid; place-items:center; font-size:50px;
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg, var(--c1), var(--c2));
+}
+.type-card .banner::after{
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 26% 18%, rgba(255,255,255,.32), transparent 55%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 10px, transparent 10px 20px);
+}
+.type-card .banner span{ position:relative; z-index:1; filter:drop-shadow(0 8px 14px rgba(var(--shadow-rgb),.3)); transition:transform .4s var(--ease); }
+.type-card:hover .banner span{ transform:scale(1.18) rotate(-6deg); }
+.type-card .body{ padding:22px 22px 24px; }
+.eyebrow{
+  font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--dimmer); margin-bottom:8px; font-weight:800;
+}
+.type-card h3{ font-size:19px; font-weight:900; margin:0 0 8px; }
+.type-card p{ font-size:13.5px; color:var(--dim); line-height:1.6; margin:0 0 18px; }
+.go{ display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:900; color:var(--c1); }
+.go .arrow{ transition:transform .2s var(--ease); }
+.type-card:hover .go .arrow{ transform:translateX(5px); }
+
+/* ---------- how it works ---------- */
+.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:70px; }
+@media (max-width:800px){ .steps{ grid-template-columns:1fr; } }
+.step{
+  border:1px solid var(--line); border-radius:var(--r-md);
+  background:linear-gradient(180deg, rgba(var(--ink-rgb),0.045), rgba(var(--ink-rgb),0.015));
+  padding:24px; position:relative; overflow:hidden;
+  transition:border-color .3s var(--ease), transform .3s var(--ease);
+}
+.step:hover{ border-color:var(--line-strong); transform:translateY(-3px); }
+.step b{
+  display:inline-grid; place-items:center; width:30px; height:30px;
+  font-size:12.5px; font-weight:900; color:var(--night);
+  background:linear-gradient(135deg, var(--coral), var(--gold));
+  border-radius:50%; margin-bottom:14px;
+}
+.step h4{ margin:0 0 6px; font-size:16.5px; font-weight:900; }
+.step p{ margin:0; font-size:13.5px; color:var(--dim); line-height:1.6; }
+
+/* ---------- editor layout ---------- */
+.back{
+  display:inline-flex; align-items:center; gap:7px; font-size:13px;
+  color:var(--dimmer); text-decoration:none; margin-bottom:16px; font-weight:700;
+}
+.back:hover{ color:var(--paper); }
+
+.layout{
+  display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:26px; align-items:start;
+}
+@media (max-width:960px){ .layout{ grid-template-columns:1fr; } }
+
+.panel{
+  background:linear-gradient(180deg, var(--night-3), var(--night-2));
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  padding:26px;
+  margin-bottom:18px;
+}
+.panel h2{
+  font-size:16.5px; font-weight:900; margin:0 0 20px;
+  display:flex; align-items:center; gap:10px;
+}
+.panel h2 .num{
+  width:25px; height:25px; border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:var(--night); display:grid; place-items:center;
+  font-size:12.5px; font-weight:900; flex:none;
+}
+
+.field{ margin-bottom:18px; }
+.field:last-child{ margin-bottom:0; }
+label{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  font-size:12.5px; font-weight:800; margin-bottom:8px; color:rgba(var(--ink-rgb),.82);
+}
+label .opt{ font-weight:600; color:var(--dimmer); }
+input[type=text], input[type=number], input[type=date], textarea, select{
+  width:100%; padding:12px 14px;
+  background:rgba(var(--shadow-rgb),0.24);
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  color:var(--paper); font-family:inherit; font-size:14.5px;
+  transition:.2s var(--ease);
+}
+input:focus, textarea:focus, select:focus{
+  outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent);
+}
+textarea{ min-height:104px; resize:vertical; line-height:1.6; }
+::placeholder{ color:rgba(var(--ink-rgb),0.28); }
+.row-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:480px){ .row-2{ grid-template-columns:1fr; } }
+.hint{ font-size:11.5px; color:var(--dimmer); margin-top:7px; }
+.counter{ font-variant-numeric:tabular-nums; }
+.counter.warn{ color:var(--coral); }
+
+/* chips */
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{
+  font-family:inherit; font-size:12.5px; font-weight:700;
+  padding:8px 13px; border-radius:100px; cursor:pointer;
+  background:rgba(var(--ink-rgb),0.05);
+  border:1px solid var(--line); color:var(--dim);
+  transition:.18s var(--ease);
+}
+.chip:hover{ color:var(--paper); border-color:var(--line-strong); transform:translateY(-1px); }
+.chip.active{ background:var(--paper); color:var(--night); border-color:var(--paper); }
+
+/* theme swatches */
+.swatches{ display:flex; flex-wrap:wrap; gap:10px; }
+.swatch{
+  width:52px; height:52px; border-radius:16px; cursor:pointer; padding:0;
+  border:2px solid transparent; position:relative;
+  transition:.2s var(--ease);
+}
+.swatch i{ position:absolute; inset:4px; border-radius:11px; display:block; }
+.swatch:hover{ transform:translateY(-2px); }
+.swatch.active{ border-color:var(--paper); }
+.swatch.active::after{
+  content:'✓'; position:absolute; inset:0; display:grid; place-items:center;
+  font-size:16px; font-weight:900; color:#fff; text-shadow:0 1px 4px rgba(var(--shadow-rgb),.5);
+}
+
+/* upload */
+.upload-box{
+  position:relative; border:1.5px dashed var(--line-strong);
+  border-radius:var(--r-md); padding:24px; text-align:center;
+  color:var(--dim); font-size:13.5px; cursor:pointer;
+  transition:.2s var(--ease); background:rgba(var(--shadow-rgb),.14);
+}
+.upload-box:hover, .upload-box.drag{
+  border-color:var(--accent); color:var(--paper);
+  background:color-mix(in oklab, var(--accent) 10%, transparent);
+}
+.upload-box input{ position:absolute; inset:0; opacity:0; cursor:pointer; }
+.upload-preview{ display:none; margin-top:12px; align-items:center; gap:12px; }
+.upload-preview.show{ display:flex; }
+.upload-preview img{ width:56px; height:56px; border-radius:14px; object-fit:cover; border:2px solid var(--accent); }
+
+/* buttons */
+.actions{ display:flex; flex-wrap:wrap; gap:10px; }
+.btn{
+  font-family:inherit; font-size:13.5px; font-weight:900; cursor:pointer;
+  padding:12px 18px; border-radius:100px; border:1px solid transparent;
+  transition:.2s var(--ease); display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary{
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:var(--night);
+  box-shadow:0 16px 32px -16px var(--accent);
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 22px 40px -16px var(--accent); }
+.btn-ghost{ background:rgba(var(--ink-rgb),0.06); border-color:var(--line); color:var(--paper); }
+.btn-ghost:hover{ background:rgba(var(--ink-rgb),0.12); }
+.btn:disabled{ opacity:.4; cursor:not-allowed; transform:none; }
+
+/* preview */
+.preview-shell{ position:sticky; top:24px; }
+.preview-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:12px; flex-wrap:wrap;
+}
+.preview-label{
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--dimmer); font-weight:800;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.live-dot{ width:7px; height:7px; border-radius:50%; background:var(--mint); box-shadow:0 0 0 0 var(--mint); animation:pulse 2s infinite; }
+@keyframes pulse{ 70%{ box-shadow:0 0 0 8px transparent; } 100%{ box-shadow:0 0 0 0 transparent; } }
+.card-frame{
+  border:1px solid var(--line); border-radius:var(--r-lg);
+  overflow:hidden; box-shadow:var(--shadow);
+  background:var(--night-2);
+  margin:0 auto; transition:max-width .3s var(--ease);
+}
+.card-frame.mobile{ max-width:380px; }
+iframe#previewFrame{ width:100%; height:620px; border:none; display:block; }
+@media (max-width:960px){
+  .preview-shell{ position:static; }
+  iframe#previewFrame{ height:520px; }
+}
+
+/* toast */
+#toast{
+  position:fixed; left:50%; bottom:26px; transform:translate(-50%, 24px);
+  background:var(--paper); color:var(--night);
+  font-size:13.5px; font-weight:800;
+  padding:12px 20px; border-radius:100px;
+  box-shadow:0 20px 40px -16px rgba(var(--shadow-rgb),.6);
+  opacity:0; pointer-events:none; transition:.28s var(--ease); z-index:99;
+}
+#toast.show{ opacity:1; transform:translate(-50%, 0); }
+
+/* drafts */
+.draft-row{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:10px 12px; border:1px solid var(--line); border-radius:var(--r-sm);
+  background:rgba(var(--ink-rgb),0.03); margin-bottom:8px; flex-wrap:wrap;
+}
+.draft-row:last-child{ margin-bottom:0; }
+.draft-name{ font-size:13px; font-weight:700; color:var(--dim); flex:1; min-width:0; }
+.draft-row .btn{ padding:7px 12px; font-size:12px; }
+
+.signature{
+  text-align:center; margin-top:74px; font-size:13px; color:var(--dimmer);
+}
+.signature b{ color:var(--gold); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a href="index.html" class="brandmark"><span class="dot">✦</span> MuGöl <span style="color:var(--dimmer);font-weight:700">Kart Atölyesi</span></a>
+  </header>
+
+  <section class="hero">
+    <div class="pill">6 kart türü · anında hazır</div>
+    <h1>Doğru anı,<br>doğru <em>kart</em> ile kutla.</h1>
+    <p class="lede">Ne için kart hazırlıyorsun? Birini seç, bilgileri doldur, temayı ve efekti kendine göre ayarla. Kartın canlı halini gör; tek dosya olarak indir, yazdır ya da bağlantısını WhatsApp’tan gönder.</p>
+    <div class="stats">
+      <div><b>6</b><span>Kart türü</span></div>
+      <div><b>6</b><span>Renk teması</span></div>
+      <div><b>5</b><span>Animasyon efekti</span></div>
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Bir tür seç</h2>
+    <span>Hepsi ücretsiz, kayıt gerekmez</span>
+  </div>
+
+  <div class="gallery">
+    <a href="dogum.html" class="type-card" style="--c1:#FF6F59;--c2:#F3B94E">
+      <div class="banner"><span>🎂</span></div>
+      <div class="body">
+        <div class="eyebrow">Kutlama</div>
+        <h3>Doğum Günü</h3>
+        <p>İsim, yaş, mesaj ve fotoğrafla kişiye özel bir doğum günü kartı.</p>
+        <div class="go">Kart hazırla <span class="arrow">→</span></div>
+      </div>
+    </a>
+    <a href="yilbasi.html" class="type-card" style="--c1:#4FC3E0;--c2:#7FD8BE">
+      <div class="banner"><span>🎆</span></div>
+      <div class="body">
+        <div class="eyebrow">Kutlama</div>
+        <h3>Yılbaşı / Yeni Yıl</h3>
+        <p>Yeni yıla girerken sevdiklerine sıcak bir dilek kartı bırak.</p>
+        <div class="go">Kart hazırla <span class="arrow">→</span></div>
+      </div>
+    </a>
+    <a href="gecmisolsun.html" class="type-card" style="--c1:#7FD8BE;--c2:#4FC3E0">
+      <div class="banner"><span>🌿</span></div>
+      <div class="body">
+        <div class="eyebrow">Destek</div>
+        <h3>Geçmiş Olsun</h3>
+        <p>İyileşme sürecinde birine iyi dileklerini gönder.</p>
+        <div class="go">Kart hazırla <span class="arrow">→</span></div>
+      </div>
+    </a>
+    <a href="basari.html" class="type-card" style="--c1:#F3B94E;--c2:#FF6F59">
+      <div class="banner"><span>🏆</span></div>
+      <div class="body">
+        <div class="eyebrow">Kutlama</div>
+        <h3>Başarı Kutlama</h3>
+        <p>Mezuniyet, yeni iş ya da sınav başarısı için tebrik kartı.</p>
+        <div class="go">Kart hazırla <span class="arrow">→</span></div>
+      </div>
+    </a>
+    <a href="tesekkur.html" class="type-card" style="--c1:#B08BEA;--c2:#FF8FA8">
+      <div class="banner"><span>💌</span></div>
+      <div class="body">
+        <div class="eyebrow">Nezaket</div>
+        <h3>Teşekkür</h3>
+        <p>Sana iyi davranan birine içten bir teşekkür notu bırak.</p>
+        <div class="go">Kart hazırla <span class="arrow">→</span></div>
+      </div>
+    </a>
+    <a href="sevgi.html" class="type-card" style="--c1:#FF8FA8;--c2:#FF6F59">
+      <div class="banner"><span>💗</span></div>
+      <div class="body">
+        <div class="eyebrow">Duygu</div>
+        <h3>Sevgi Kartı</h3>
+        <p>Sevgililer günü ya da sadece canın istediği için küçük bir not.</p>
+        <div class="go">Kart hazırla <span class="arrow">→</span></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="steps">
+    <div class="step"><b>1</b><h4>Doldur</h4><p>İsim, kısa mesaj ve istersen bir fotoğraf ekle. Hazır mesaj önerilerinden de seçebilirsin.</p></div>
+    <div class="step"><b>2</b><h4>Kişiselleştir</h4><p>Altı renk temasından, yazı tipinden, çerçeve stilinden ve konfeti, kar, kalp gibi efektlerden seç. Değişiklik anında önizlemeye yansır.</p></div>
+    <div class="step"><b>3</b><h4>Gönder</h4><p>Kartı tek HTML dosyası olarak indir, yazdır, bağlantısını kopyala veya doğrudan WhatsApp’tan paylaş.</p></div>
+  </div>
+
+  <div class="signature">Sevgiyle hazırlandı — <b>MuGöl</b></div>
+</div>
+</body>
+</html>

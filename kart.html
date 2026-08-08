@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sana bir kart var — MuGöl Kart Atölyesi</title>
+<meta name="description" content="MuGöl Kart Atölyesi ile hazırlanmış kişiye özel dijital tebrik kartı.">
+<meta property="og:title" content="Sana bir kart var 💌">
+<meta property="og:description" content="MuGöl Kart Atölyesi ile hazırlanmış kişiye özel bir kart.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+  html,body{margin:0;height:100%;background:#12152B;font-family:system-ui,sans-serif;color:#FFF9EE;}
+  iframe{width:100%;height:100%;border:none;display:block;}
+  .empty{display:grid;place-items:center;height:100%;text-align:center;padding:24px;}
+  .empty a{color:#F3B94E;font-weight:800;}
+</style>
+</head>
+<body>
+<script>
+/* MuGöl Kart Atölyesi — kart motoru (tip tanımları + kart üreteci) */
+
+window.MUGOL = (function () {
+  const THEMES = {
+    gece:    { label: 'Gece',      bg: '#12152B', card: '#1C2142', text: '#FFF9EE', a1: '#FF6F59', a2: '#F3B94E', soft: '#7FD8BE' },
+    kagit:   { label: 'Kağıt',     bg: '#FFF6E9', card: '#FFFFFF', text: '#241F33', a1: '#E4572E', a2: '#C99B2E', soft: '#3E8E7E' },
+    okyanus: { label: 'Okyanus',   bg: '#08243A', card: '#0E3350', text: '#EAF7FF', a1: '#4FC3E0', a2: '#7FD8BE', soft: '#B7E4F5' },
+    gul:     { label: 'Gül',       bg: '#2A1226', card: '#3A1A34', text: '#FFF0F6', a1: '#FF8FA8', a2: '#B08BEA', soft: '#FFD3E0' },
+    orman:   { label: 'Orman',     bg: '#0E1F17', card: '#152C21', text: '#EFFBF2', a1: '#7FD8BE', a2: '#C7E86A', soft: '#A9E5C6' },
+    altin:   { label: 'Altın',     bg: '#1A1408', card: '#261D0D', text: '#FFF6E0', a1: '#F3B94E', a2: '#FFE29A', soft: '#E8C87A' },
+    bulut:   { label: 'Bulut',     bg: '#F4F6FB', card: '#FFFFFF', text: '#2B2E42', a1: '#6C8CFF', a2: '#FFB4A2', soft: '#8FA6E8', light: true },
+    seftali: { label: 'Şeftali',   bg: '#FFF3EC', card: '#FFFFFF', text: '#3A2A24', a1: '#FF8A65', a2: '#FFC38B', soft: '#F2A488', light: true },
+    lavanta: { label: 'Lavanta',   bg: '#F5F1FC', card: '#FFFFFF', text: '#332B45', a1: '#9C7FE0', a2: '#F4A6C6', soft: '#B9A6E8', light: true },
+    naneli:  { label: 'Naneli',    bg: '#F0FAF4', card: '#FFFFFF', text: '#233A2E', a1: '#4FB88A', a2: '#8ED0A8', soft: '#6FC79E', light: true },
+    mercan:  { label: 'Mercan',    bg: '#2B0F14', card: '#3A161D', text: '#FFEFEC', a1: '#FF6B6B', a2: '#FFB199', soft: '#FF9E9E' },
+    indigo:  { label: 'İndigo',    bg: '#0D1030', card: '#161A45', text: '#EAEBFF', a1: '#7C8BFF', a2: '#C9A6FF', soft: '#9FB0FF' },
+    vanilya: { label: 'Vanilya',   bg: '#FBF7EE', card: '#FFFFFF', text: '#3B3226', a1: '#D9A441', a2: '#B98B5E', soft: '#E3C089', light: true }
+  };
+
+  const EFFECTS = {
+    konfeti: { label: 'Konfeti' },
+    kar:     { label: 'Kar' },
+    kalp:    { label: 'Kalp' },
+    yildiz:  { label: 'Yıldız' },
+    balon:   { label: 'Balon' },
+    yok:     { label: 'Efekt yok' }
+  };
+
+  const FONTS = {
+    nunito:  { label: 'Yuvarlak',  stack: "'Nunito', system-ui, sans-serif", url: 'family=Nunito:wght@400;600;700;800;900' },
+    serif:   { label: 'Zarif',     stack: "'Playfair Display', Georgia, serif", url: 'family=Playfair+Display:wght@500;700;800;900' },
+    yazi:    { label: 'El Yazısı', stack: "'Caveat', cursive", url: 'family=Caveat:wght@500;600;700' },
+    mono:    { label: 'Daktilo',   stack: "'Space Mono', monospace", url: 'family=Space+Mono:wght@400;700' }
+  };
+
+  const FRAMES = {
+    yumusak: { label: 'Yumuşak', radius: '30px', border: '1px' },
+    keskin:  { label: 'Keskin',  radius: '4px',  border: '1px' },
+    kalin:   { label: 'Kalın Çerçeve', radius: '22px', border: '3px' },
+    yuvarlak:{ label: 'Oval',    radius: '48px', border: '1px' },
+    cift:    { label: 'Çift Çizgi', radius: '18px', border: '1px', double: true },
+    noktali: { label: 'Noktalı Kenar', radius: '24px', border: '2px', dashed: true }
+  };
+
+  const RATIOS = {
+    kart:      { label: 'Kart',      maxWidth: '470px', aspect: '' },
+    kartpostal:{ label: 'Kartpostal',maxWidth: '520px', aspect: '4 / 3' },
+    kare:      { label: 'Kare',      maxWidth: '420px', aspect: '1 / 1' }
+  };
+
+  const PATTERNS = {
+    duz:    { label: 'Düz' },
+    noktalar:{ label: 'Noktalar' },
+    cizgiler:{ label: 'Çizgiler' },
+    daire:  { label: 'Daire Yaydı' }
+  };
+
+  const SEALS = {
+    emoji:  { label: 'Sembol' },
+    yildiz: { label: 'Yıldız', glyph: '✦' },
+    kalp:   { label: 'Kalp', glyph: '♥' },
+    yaprak: { label: 'Yaprak', glyph: '❁' }
+  };
+
+  function patternCss(pattern, th) {
+    const dotCol = th.text + '14';
+    const lineCol = th.text + '12';
+    switch (pattern) {
+      case 'noktalar':
+        return `background-image: radial-gradient(${dotCol} 1.6px, transparent 1.6px); background-size: 18px 18px;`;
+      case 'cizgiler':
+        return `background-image: repeating-linear-gradient(135deg, ${lineCol} 0 2px, transparent 2px 14px);`;
+      case 'daire':
+        return `background-image: radial-gradient(circle at 100% 0%, ${th.a1}1A, transparent 55%), radial-gradient(circle at 0% 100%, ${th.a2}1A, transparent 55%);`;
+      default:
+        return '';
+    }
+  }
+
+  const TYPES = {
+    dogum: {
+      slug: 'dogum',
+      emoji: '🎂',
+      name: 'Doğum Günü',
+      tag: 'Kutlama',
+      c1: '#FF6F59', c2: '#F3B94E',
+      title: 'Onun için bir <em>doğum günü kartı</em> hazırla.',
+      lede: 'Bilgileri doldur, sağda kartın canlı halini gör. Beğendiğinde tek dosyalık bir tebrik indir ya da bağlantı olarak paylaş.',
+      theme: 'gece', effect: 'konfeti',
+      showAge: true,
+      eyebrow: 'İyi ki doğdun',
+      heading: (d) => `Mutlu yıllar,<br><em>${d.name}</em>!`,
+      docTitle: (d) => `İyi ki doğdun, ${d.name}!`,
+      subline: (d) => d.age ? `Bugün itibariyle resmen <strong>${d.age}</strong> yaşındasın.` : 'Bugün tamamen senin günün.',
+      suggestions: [
+        'Nice mutlu, sağlıklı ve kahkahalı senelere. Seni çok seviyorum!',
+        'Bu yaşın sana hayalini kurduğun her şeyi getirmesini diliyorum.',
+        'Hayatımda olduğun için şanslıyım. İyi ki varsın, iyi ki doğdun!'
+      ]
+    },
+    yilbasi: {
+      slug: 'yilbasi',
+      emoji: '🎆',
+      name: 'Yılbaşı',
+      tag: 'Kutlama',
+      c1: '#4FC3E0', c2: '#7FD8BE',
+      title: 'Yeni yıla <em>güzel bir dilekle</em> gir.',
+      lede: 'Sevdiklerine yeni yıl dileğini gönder. Kartını canlı gör, indir ya da bağlantısını paylaş.',
+      theme: 'okyanus', effect: 'kar',
+      showYear: true,
+      eyebrow: 'Mutlu yıllar',
+      heading: (d) => `Yeni yılın kutlu olsun,<br><em>${d.name}</em>!`,
+      docTitle: (d) => `Yeni yılın kutlu olsun, ${d.name}!`,
+      subline: (d) => d.year ? `<strong>${d.year}</strong> sana yakışanı getirsin.` : 'Yeni yıl sana yakışanı getirsin.',
+      suggestions: [
+        'Yeni yılda sağlık, huzur ve bol kahkaha dilerim.',
+        'Bu yıl hayallerinin peşinden gitmen için tam zamanı. Mutlu yıllar!',
+        'Geçen yılın yorgunluğu geride kalsın, yenisi sana iyi gelsin.'
+      ]
+    },
+    gecmisolsun: {
+      slug: 'gecmisolsun',
+      emoji: '🌿',
+      name: 'Geçmiş Olsun',
+      tag: 'Destek',
+      c1: '#7FD8BE', c2: '#4FC3E0',
+      title: 'İyileşme sürecinde <em>yanında ol.</em>',
+      lede: 'Sıcak ve sade bir geçmiş olsun kartı hazırla, moral olsun.',
+      theme: 'orman', effect: 'yok',
+      eyebrow: 'Geçmiş olsun',
+      heading: (d) => `Geçmiş olsun,<br><em>${d.name}</em>.`,
+      docTitle: (d) => `Geçmiş olsun, ${d.name}`,
+      subline: () => 'Bir an önce eski enerjine kavuşmanı diliyorum.',
+      suggestions: [
+        'Acele etme, iyileşmek de bir iş. Buradayım, ihtiyacın olursa haber ver.',
+        'Yatağın en sıkıcı yer olduğunu biliyorum ama sabret, yakında ayaktasın.',
+        'Sağlığın her şeyden önemli. Kendine iyi bak, seni bekliyoruz.'
+      ]
+    },
+    basari: {
+      slug: 'basari',
+      emoji: '🏆',
+      name: 'Başarı Kutlama',
+      tag: 'Kutlama',
+      c1: '#F3B94E', c2: '#FF6F59',
+      title: 'Emeğinin karşılığını <em>tebrik et.</em>',
+      lede: 'Mezuniyet, yeni iş ya da sınav başarısı — hepsi için tebrik kartı.',
+      theme: 'altin', effect: 'yildiz',
+      showAchievement: true,
+      eyebrow: 'Tebrikler',
+      heading: (d) => `Tebrikler,<br><em>${d.name}</em>!`,
+      docTitle: (d) => `Tebrikler, ${d.name}!`,
+      subline: (d) => d.achievement ? `<strong>${d.achievement}</strong> — hak ettin.` : 'Bu başarıyı sonuna kadar hak ettin.',
+      suggestions: [
+        'Bu başarı tesadüf değil, emeğinin sonucu. Seninle gurur duyuyorum!',
+        'Daha nice başarıya. Bu daha başlangıç!',
+        'Ne kadar çalıştığını biliyorum. Sonunda oldu, tebrikler!'
+      ]
+    },
+    tesekkur: {
+      slug: 'tesekkur',
+      emoji: '💌',
+      name: 'Teşekkür',
+      tag: 'Nezaket',
+      c1: '#B08BEA', c2: '#FF8FA8',
+      title: 'Bir <em>teşekkür</em> her zaman iyi gelir.',
+      lede: 'Sana iyi davranan birine kısa ama içten bir teşekkür kartı bırak.',
+      theme: 'gul', effect: 'kalp',
+      showReason: true,
+      eyebrow: 'Teşekkürler',
+      heading: (d) => `Teşekkür ederim,<br><em>${d.name}</em>.`,
+      docTitle: (d) => `Teşekkürler, ${d.name}`,
+      subline: (d) => d.reason ? `${d.reason} için minnettarım.` : 'Yaptıkların için minnettarım.',
+      suggestions: [
+        'Yaptığın küçük şey benim için hiç de küçük değildi. Teşekkürler.',
+        'Bana ayırdığın zaman için gerçekten minnettarım.',
+        'İyi ki varsın. Bunu bilmeni istedim.'
+      ]
+    },
+    sevgi: {
+      slug: 'sevgi',
+      emoji: '💗',
+      name: 'Sevgi Kartı',
+      tag: 'Duygu',
+      c1: '#FF8FA8', c2: '#FF6F59',
+      title: 'Söylemeye çekindiğin şeyi <em>karta yaz.</em>',
+      lede: 'Sevgililer günü ya da sadece canın istediği için — küçük bir sevgi notu.',
+      theme: 'gul', effect: 'kalp',
+      eyebrow: 'Sana',
+      heading: (d) => `Seni düşündüm,<br><em>${d.name}</em>.`,
+      docTitle: (d) => `${d.name} için küçük bir not`,
+      subline: () => 'Bunu söylemek için özel bir gün gerekmiyordu.',
+      suggestions: [
+        'Gün içinde aklıma geldin ve gülümsedim. O kadar.',
+        'Seninle her şey daha kolay. Bunu bilmeni istedim.',
+        'Kelimeler biraz yetersiz ama deneyeyim: seni çok seviyorum.'
+      ]
+    }
+  };
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function effectScript(effect, theme) {
+    if (effect === 'yok') return '';
+    const shapes = {
+      konfeti: ['rect'],
+      kar: ['❄'],
+      kalp: ['♥'],
+      yildiz: ['✦', '★'],
+      balon: ['🎈']
+    }[effect] || ['rect'];
+    const colors = [theme.a1, theme.a2, theme.soft];
+    return `
+<canvas id="fx"></canvas>
+<script>
+(function(){
+  var c=document.getElementById('fx'), x=c.getContext('2d'), W,H;
+  function rs(){ W=c.width=innerWidth; H=c.height=innerHeight; } rs(); addEventListener('resize',rs);
+  var shapes=${JSON.stringify(shapes)}, cols=${JSON.stringify(colors)}, ps=[];
+  function mk(init){ return { x:Math.random()*W, y: init?Math.random()*H:-30, s:9+Math.random()*14,
+    col:cols[(Math.random()*cols.length)|0], sh:shapes[(Math.random()*shapes.length)|0],
+    vy:.35+Math.random()*.85, vx:-.35+Math.random()*.7, r:Math.random()*360, vr:-1.6+Math.random()*3.2, o:.45+Math.random()*.45 }; }
+  for(var i=0;i<34;i++) ps.push(mk(true));
+  function loop(){
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<ps.length;i++){ var p=ps[i];
+      p.x+=p.vx; p.y+=p.vy; p.r+=p.vr;
+      if(p.y>H+40){ ps[i]=mk(false); continue; }
+      x.save(); x.translate(p.x,p.y); x.rotate(p.r*Math.PI/180); x.globalAlpha=p.o; x.fillStyle=p.col;
+      if(p.sh==='rect'){ x.fillRect(-p.s/4,-p.s/2,p.s/2,p.s); }
+      else { x.font=p.s+'px serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText(p.sh,0,0); }
+      x.restore();
+    }
+    requestAnimationFrame(loop);
+  }
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches) loop();
+})();
+<\/script>`;
+  }
+
+  /* Kartın tek dosyalık HTML çıktısı */
+  function buildCard(typeKey, data) {
+    const t = TYPES[typeKey];
+    const th = THEMES[data.theme] || THEMES[t.theme];
+    const fontKey = FONTS[data.font] ? data.font : 'nunito';
+    const font = FONTS[fontKey];
+    const frameKey = FRAMES[data.frame] ? data.frame : 'yumusak';
+    const frame = FRAMES[frameKey];
+    const ratioKey = RATIOS[data.ratio] ? data.ratio : 'kart';
+    const ratio = RATIOS[ratioKey];
+    const patternKey = PATTERNS[data.pattern] ? data.pattern : 'duz';
+    const sealKey = SEALS[data.sealStyle] ? data.sealStyle : 'emoji';
+    const borderStyle = frame.dashed ? 'dashed' : (frame.double ? 'double' : 'solid');
+    const borderWidth = frame.double ? '4px' : frame.border;
+    const shadowColor = th.light ? (th.text + '26') : 'rgba(0,0,0,.7)';
+    const d = {
+      name: esc((data.name || '').trim()) || 'Sevgili dostum',
+      age: esc((data.age || '').trim()),
+      year: esc((data.year || '').trim()),
+      achievement: esc((data.achievement || '').trim()),
+      reason: esc((data.reason || '').trim()),
+      relation: esc((data.relation || '').trim()),
+      msg: esc((data.msg || '').trim()),
+      sender: esc((data.sender || '').trim())
+    };
+
+    const photo = data.photo
+      ? `<div class="ph"><img src="${data.photo}" alt="${d.name}"></div>`
+      : '';
+    const rel = d.relation ? `<p class="rel">Sen benim ${d.relation}sın ve bunu söylemeden geçemezdim.</p>` : '';
+    const msg = d.msg ? `<p class="msg">“${d.msg.replace(/\n/g, '<br>')}”</p>` : '';
+    const sender = d.sender ? `<p class="sign">— ${d.sender}</p>` : '';
+    const sealGlyph = sealKey === 'emoji' ? (t.emoji || '✦') : SEALS[sealKey].glyph;
+    const seal = data.seal
+      ? `<div class="seal" aria-hidden="true"><span>${esc(sealGlyph)}</span></div>`
+      : '';
+
+    const corners = data.corners
+  ? `<span class="corner tl"></span><span class="corner br"></span>`
+  : '';
+return `<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(t.docTitle(d))}</title>
+<meta name="description" content="${esc(t.docTitle(d))} — MuGöl Kart Atölyesi ile hazırlandı.">
+<meta property="og:title" content="${esc(t.docTitle(d))}">
+<meta property="og:description" content="MuGöl Kart Atölyesi ile hazırlanmış kişiye özel bir kart.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?${font.url}&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{
+    margin:0; height:100vh; width:100vw; font-family:${font.stack};
+    background:
+      radial-gradient(700px 500px at 82% -5%, ${th.a2}26, transparent 60%),
+      radial-gradient(700px 500px at 5% 105%, ${th.soft}22, transparent 60%),
+      ${th.bg};
+    color:${th.text};
+    display:flex; align-items:center; justify-content:center;
+    padding:16px; overflow:hidden;
+  }
+  canvas#fx{ position:fixed; inset:0; pointer-events:none; z-index:1; }
+  .card{
+    position:relative; z-index:2; width:100%; max-width:${ratio.maxWidth};
+    max-height:100%; overflow-y:auto;
+    ${ratio.aspect ? `aspect-ratio:${ratio.aspect}; display:flex; flex-direction:column; justify-content:center;` : ''}
+    background:${th.card};
+    ${patternCss(patternKey, th)}
+    border:${borderWidth} ${borderStyle} ${th.text}${frame.dashed ? '4A' : (frame.double ? '33' : '1F')};
+    border-radius:${frame.radius}; padding:clamp(20px,4vh,42px) 34px;
+    text-align:center;
+    box-shadow:0 50px 110px -40px ${shadowColor}, inset 0 1px 0 ${th.light ? '#FFFFFF' : th.text + '14'};
+    animation:rise .8s cubic-bezier(.2,1.2,.4,1) both;
+  }
+  .card::after{
+    content:''; position:absolute; z-index:1; pointer-events:none;
+    top:14px; left:14px; right:14px; bottom:14px; border-radius:calc(${frame.radius} - 10px);
+    background:radial-gradient(420px 180px at 50% -10%, ${th.a2}12, transparent 70%);
+  }
+  .corner{
+    position:absolute; width:30px; height:30px; opacity:.55; pointer-events:none; z-index:3;
+  }
+  .corner.tl{ top:10px; left:10px; border-top:2px solid ${th.a1}; border-left:2px solid ${th.a1}; border-top-left-radius:10px; }
+  .corner.br{ bottom:10px; right:10px; border-bottom:2px solid ${th.a2}; border-right:2px solid ${th.a2}; border-bottom-right-radius:10px; }
+  .seal{
+    position:absolute; top:16px; right:16px; z-index:4;
+    width:38px; height:38px; border-radius:50%;
+    background:linear-gradient(135deg, ${th.a1}, ${th.a2});
+    display:grid; place-items:center; font-size:17px;
+    box-shadow:0 8px 18px -6px ${th.a1}80, inset 0 0 0 2px ${th.card}CC;
+  }
+  .card::before{
+    content:''; position:absolute; left:0; right:0; top:0; height:${data.accentWidth === 'ince' ? '3px' : data.accentWidth === 'kalin' ? '8px' : '5px'};
+    background:linear-gradient(90deg, ${th.a1}, ${th.a2}, ${th.soft});
+  }
+  @keyframes rise{ from{ opacity:0; transform:translateY(26px) scale(.97);} to{ opacity:1; transform:none;} }
+  .eyebrow{
+    font-size:11.5px; letter-spacing:.18em; text-transform:uppercase;
+    font-weight:900; color:${th.a2}; margin-bottom:18px;
+    display:flex; align-items:center; justify-content:center; gap:9px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:''; height:1px; width:22px; background:${th.a2}55;
+  }
+  .ph{
+    width:118px; height:118px; border-radius:50%; overflow:hidden;
+    margin:0 auto 22px; border:3px solid ${th.a1};
+    box-shadow:0 18px 36px -18px ${th.a1};
+  }
+  .ph img{ width:100%; height:100%; object-fit:cover; display:block; }
+  h1{ font-weight:900; font-size:clamp(27px,6.4vw,36px); line-height:1.14; margin:0 0 14px; letter-spacing:-.02em; }
+  h1 em{ font-style:normal; color:${th.a1}; }
+  .sub{ font-size:15px; color:${th.text}B0; margin:0 0 6px; line-height:1.6; }
+  .rel{ font-size:13.5px; color:${th.text}80; margin:0 0 4px; line-height:1.6; }
+  .msg{
+    position:relative;
+    font-size:16px; font-style:italic; line-height:1.7; color:${th.soft};
+    margin:24px 0; padding:22px 8px;
+    border-top:1px solid ${th.text}1A; border-bottom:1px solid ${th.text}1A;
+  }
+  .msg::before{
+    content:'“'; position:absolute; top:2px; left:2px; font-size:34px; font-style:normal;
+    font-family:Georgia, serif; color:${th.a1}55; line-height:1;
+  }
+  .sign{ font-size:14px; font-weight:800; color:${th.a2}; margin:18px 0 0; }
+  .foot{
+    margin-top:26px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:${th.text}59;
+  }
+  .foot a{ color:${th.a2}; text-decoration:none; font-weight:800; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; } }
+</style>
+</head>
+<body>
+${effectScript(data.effect || t.effect, th)}
+<div class="card">
+  ${corners}
+  ${seal}
+  <div class="eyebrow">${esc(t.eyebrow)}</div>
+  ${photo}
+  <h1>${t.heading(d)}</h1>
+  <p class="sub">${t.subline(d)}</p>
+  ${rel}
+  ${msg}
+  ${sender}
+  <div class="foot">MuGöl Kart Atölyesi</div>
+</div>
+</body>
+</html>`;
+  }
+
+  /* Paylaşılabilir bağlantı kodlaması (UTF-8 güvenli base64) */
+  function encode(obj) {
+    const json = JSON.stringify(obj);
+    const bytes = new TextEncoder().encode(json);
+    let bin = '';
+    bytes.forEach((b) => (bin += String.fromCharCode(b)));
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function decode(str) {
+    try {
+      const b64 = str.replace(/-/g, '+').replace(/_/g, '/');
+      const bin = atob(b64);
+      const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+      return JSON.parse(new TextDecoder().decode(bytes));
+    } catch (e) { return null; }
+  }
+
+  return { THEMES, EFFECTS, FONTS, FRAMES, RATIOS, PATTERNS, SEALS, TYPES, buildCard, encode, decode, esc };
+})();
+
+</script>
+<script>
+(function(){
+  var params = new URLSearchParams(location.search);
+  var type = params.get('t') || 'dogum';
+  var data = location.hash.length > 1 ? MUGOL.decode(decodeURIComponent(location.hash.slice(1))) : null;
+  if(!data || !MUGOL.TYPES[type]){
+    document.body.innerHTML = '<div class="empty"><div><h1>Kart bulunamadı</h1><p>Bağlantı eksik ya da bozulmuş olabilir.</p><a href="index.html">Kendi kartını hazırla →</a></div></div>';
+    return;
+  }
+  var f = document.createElement('iframe');
+  f.title = 'Kart';
+  f.srcdoc = MUGOL.buildCard(type, data);
+  document.body.appendChild(f);
+})();
+</script>
+</body>
+</html>

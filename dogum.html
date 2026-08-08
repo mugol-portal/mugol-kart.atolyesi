@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MuGöl Kart Atölyesi — Doğum Günü Kartı Hazırla</title>
+<meta name="description" content="Bilgileri doldur, sağda kartın canlı halini gör. Beğendiğinde tek dosyalık bir tebrik indir ya da bağlantı olarak paylaş.">
+<meta property="og:title" content="MuGöl Kart Atölyesi — Doğum Günü Kartı Hazırla">
+<meta property="og:description" content="Bilgileri doldur, sağda kartın canlı halini gör. Beğendiğinde tek dosyalık bir tebrik indir ya da bağlantı olarak paylaş.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* MuGöl Kart Atölyesi — ortak tasarım sistemi */
+
+:root{
+  /* açık tema paleti */
+  --night:#FFFFFF;
+  --night-2:#FBF8F2;
+  --night-3:#F5EFE3;
+  --paper:#241F33;
+  --coral:#E4572E;
+  --gold:#C99B2E;
+  --mint:#3E8E7E;
+  --sky:#2E8FB0;
+  --lilac:#8B6BC7;
+  --rose:#E85D82;
+
+  --accent:var(--coral);
+  --accent-2:var(--gold);
+
+  --ink-rgb:36,31,51;
+  --shadow-rgb:120,100,70;
+
+  --line:rgba(var(--ink-rgb),0.12);
+  --line-strong:rgba(var(--ink-rgb),0.22);
+  --dim:rgba(var(--ink-rgb),0.66);
+  --dimmer:rgba(var(--ink-rgb),0.46);
+
+  --r-sm:12px;
+  --r-md:18px;
+  --r-lg:26px;
+  --shadow:0 30px 70px -30px rgba(var(--shadow-rgb),0.28);
+  --ease:cubic-bezier(.2,1,.3,1);
+}
+
+*{ box-sizing:border-box; }
+
+html,body{
+  margin:0;
+  min-height:100%;
+  font-family:'Nunito', system-ui, sans-serif;
+  color:var(--paper);
+  background:
+    radial-gradient(900px 600px at 88% -10%, color-mix(in oklab, var(--accent-2) 18%, transparent), transparent 60%),
+    radial-gradient(800px 600px at 0% 100%, color-mix(in oklab, var(--mint) 14%, transparent), transparent 60%),
+    var(--night);
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+
+body::before{
+  content:'';
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:radial-gradient(rgba(var(--ink-rgb),0.055) 1px, transparent 1px);
+  background-size:22px 22px;
+  mask-image:radial-gradient(circle at 50% 30%, #000, transparent 78%);
+}
+
+a{ color:inherit; }
+
+.wrap{
+  position:relative; z-index:2;
+  max-width:1180px;
+  margin:0 auto;
+  padding:34px 22px 90px;
+}
+
+/* ---------- header ---------- */
+.top{
+  display:flex; align-items:center; justify-content:center;
+  gap:16px;
+  padding:14px 22px;
+  border:1px solid var(--line);
+  border-radius:100px;
+  background:rgba(var(--ink-rgb),0.04);
+  backdrop-filter:blur(10px);
+  margin-bottom:40px;
+  width:fit-content;
+  margin-left:auto; margin-right:auto;
+}
+.brandmark{
+  display:inline-flex; align-items:center; gap:9px;
+  font-weight:900; font-size:15px; letter-spacing:.01em;
+  text-decoration:none; color:var(--paper);
+}
+.brandmark .dot{
+  width:22px; height:22px; border-radius:8px;
+  background:linear-gradient(135deg, var(--coral), var(--gold));
+  display:grid; place-items:center; font-size:12px;
+  box-shadow:0 6px 18px -6px var(--coral);
+}
+.top nav{ display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.top nav a{
+  font-size:12.5px; font-weight:700; text-decoration:none;
+  color:var(--dim); padding:7px 12px; border-radius:100px;
+  transition:.2s var(--ease);
+}
+.top nav a:hover{ color:var(--paper); background:rgba(var(--ink-rgb),0.08); }
+.top nav a.active{ color:var(--night); background:var(--paper); }
+
+/* ---------- hero ---------- */
+.hero{ max-width:720px; margin-bottom:46px; }
+.pill{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid color-mix(in oklab, var(--gold) 40%, transparent);
+  background:color-mix(in oklab, var(--gold) 12%, transparent);
+  padding:6px 13px; border-radius:100px; margin-bottom:20px;
+}
+h1{
+  font-weight:900;
+  font-size:clamp(36px, 6vw, 60px);
+  line-height:1.03; letter-spacing:-0.02em;
+  margin:0 0 16px;
+}
+h1 em{
+  font-style:normal;
+  background:linear-gradient(100deg, var(--coral), var(--gold) 55%, var(--mint));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+p.lede{
+  font-size:16.5px; line-height:1.7; color:var(--dim); margin:0;
+}
+
+.stats{
+  display:flex; gap:28px; flex-wrap:wrap; margin-top:28px;
+}
+.stats div b{ display:block; font-size:22px; font-weight:900; }
+.stats div span{ font-size:12px; color:var(--dimmer); letter-spacing:.06em; text-transform:uppercase; }
+
+/* ---------- gallery ---------- */
+.section-head{
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:14px; flex-wrap:wrap; margin:0 0 20px;
+}
+.section-head h2{ font-size:19px; font-weight:900; margin:0; }
+.section-head span{ font-size:13px; color:var(--dimmer); }
+
+.gallery{
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+}
+@media (max-width:900px){ .gallery{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:580px){ .gallery{ grid-template-columns:1fr; } }
+
+.type-card{
+  display:block; text-decoration:none; color:inherit;
+  background:linear-gradient(180deg, var(--night-3), var(--night-2));
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  overflow:hidden; position:relative;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+.type-card:hover{
+  transform:translateY(-7px);
+  border-color:var(--line-strong);
+  box-shadow:var(--shadow);
+}
+.type-card .banner{
+  height:132px; display:grid; place-items:center; font-size:46px;
+  position:relative; overflow:hidden;
+  background:linear-gradient(135deg, var(--c1), var(--c2));
+}
+.type-card .banner::after{
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle at 26% 18%, rgba(255,255,255,.28), transparent 55%),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 10px, transparent 10px 20px);
+}
+.type-card .banner span{ position:relative; z-index:1; filter:drop-shadow(0 8px 14px rgba(var(--shadow-rgb),.3)); transition:transform .35s var(--ease); }
+.type-card:hover .banner span{ transform:scale(1.14) rotate(-6deg); }
+.type-card .body{ padding:20px 20px 22px; }
+.eyebrow{
+  font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--dimmer); margin-bottom:8px; font-weight:800;
+}
+.type-card h3{ font-size:18.5px; font-weight:900; margin:0 0 8px; }
+.type-card p{ font-size:13.5px; color:var(--dim); line-height:1.6; margin:0 0 16px; }
+.go{ display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:900; color:var(--c1); }
+.go .arrow{ transition:transform .2s var(--ease); }
+.type-card:hover .go .arrow{ transform:translateX(5px); }
+
+/* ---------- how it works ---------- */
+.steps{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:64px; }
+@media (max-width:800px){ .steps{ grid-template-columns:1fr; } }
+.step{
+  border:1px solid var(--line); border-radius:var(--r-md);
+  background:rgba(var(--ink-rgb),0.03); padding:22px;
+}
+.step b{ display:block; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.step h4{ margin:0 0 6px; font-size:16px; font-weight:900; }
+.step p{ margin:0; font-size:13.5px; color:var(--dim); line-height:1.6; }
+
+/* ---------- editor layout ---------- */
+.back{
+  display:inline-flex; align-items:center; gap:7px; font-size:13px;
+  color:var(--dimmer); text-decoration:none; margin-bottom:16px; font-weight:700;
+}
+.back:hover{ color:var(--paper); }
+
+.layout{
+  display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  gap:26px; align-items:start;
+}
+@media (max-width:960px){ .layout{ grid-template-columns:1fr; } }
+
+.panel{
+  background:linear-gradient(180deg, var(--night-3), var(--night-2));
+  border:1px solid var(--line);
+  border-radius:var(--r-lg);
+  padding:26px;
+  margin-bottom:18px;
+}
+.panel h2{
+  font-size:16.5px; font-weight:900; margin:0 0 20px;
+  display:flex; align-items:center; gap:10px;
+}
+.panel h2 .num{
+  width:25px; height:25px; border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:var(--night); display:grid; place-items:center;
+  font-size:12.5px; font-weight:900; flex:none;
+}
+
+.field{ margin-bottom:18px; }
+.field:last-child{ margin-bottom:0; }
+label{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  font-size:12.5px; font-weight:800; margin-bottom:8px; color:rgba(var(--ink-rgb),.82);
+}
+label .opt{ font-weight:600; color:var(--dimmer); }
+input[type=text], input[type=number], input[type=date], textarea, select{
+  width:100%; padding:12px 14px;
+  background:rgba(var(--shadow-rgb),0.24);
+  border:1px solid var(--line);
+  border-radius:var(--r-sm);
+  color:var(--paper); font-family:inherit; font-size:14.5px;
+  transition:.2s var(--ease);
+}
+input:focus, textarea:focus, select:focus{
+  outline:none; border-color:var(--accent);
+  box-shadow:0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent);
+}
+textarea{ min-height:104px; resize:vertical; line-height:1.6; }
+::placeholder{ color:rgba(var(--ink-rgb),0.28); }
+.row-2{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+@media (max-width:480px){ .row-2{ grid-template-columns:1fr; } }
+.hint{ font-size:11.5px; color:var(--dimmer); margin-top:7px; }
+.counter{ font-variant-numeric:tabular-nums; }
+.counter.warn{ color:var(--coral); }
+
+/* chips */
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.check-row{ display:flex; align-items:center; gap:10px; cursor:pointer; font-weight:700; font-size:14px; }
+.check-row input{ width:18px; height:18px; accent-color:var(--accent); cursor:pointer; }
+.chip{
+  font-family:inherit; font-size:12.5px; font-weight:700;
+  padding:8px 13px; border-radius:100px; cursor:pointer;
+  background:rgba(var(--ink-rgb),0.05);
+  border:1px solid var(--line); color:var(--dim);
+  transition:.18s var(--ease);
+}
+.chip:hover{ color:var(--paper); border-color:var(--line-strong); transform:translateY(-1px); }
+.chip.active{ background:var(--paper); color:var(--night); border-color:var(--paper); }
+
+/* theme swatches */
+.swatches{ display:flex; flex-wrap:wrap; gap:10px; }
+.swatch{
+  width:52px; height:52px; border-radius:16px; cursor:pointer; padding:0;
+  border:2px solid transparent; position:relative;
+  transition:.2s var(--ease);
+}
+.swatch i{ position:absolute; inset:4px; border-radius:11px; display:block; }
+.swatch:hover{ transform:translateY(-2px); }
+.swatch.active{ border-color:var(--paper); }
+.swatch.active::after{
+  content:'✓'; position:absolute; inset:0; display:grid; place-items:center;
+  font-size:16px; font-weight:900; color:#fff; text-shadow:0 1px 4px rgba(var(--shadow-rgb),.5);
+}
+
+/* upload */
+.upload-box{
+  position:relative; border:1.5px dashed var(--line-strong);
+  border-radius:var(--r-md); padding:24px; text-align:center;
+  color:var(--dim); font-size:13.5px; cursor:pointer;
+  transition:.2s var(--ease); background:rgba(var(--shadow-rgb),.14);
+}
+.upload-box:hover, .upload-box.drag{
+  border-color:var(--accent); color:var(--paper);
+  background:color-mix(in oklab, var(--accent) 10%, transparent);
+}
+.upload-box input{ position:absolute; inset:0; opacity:0; cursor:pointer; }
+.upload-preview{ display:none; margin-top:12px; align-items:center; gap:12px; }
+.upload-preview.show{ display:flex; }
+.upload-preview img{ width:56px; height:56px; border-radius:14px; object-fit:cover; border:2px solid var(--accent); }
+
+/* buttons */
+.actions{ display:flex; flex-wrap:wrap; gap:10px; }
+.btn{
+  font-family:inherit; font-size:13.5px; font-weight:900; cursor:pointer;
+  padding:12px 18px; border-radius:100px; border:1px solid transparent;
+  transition:.2s var(--ease); display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary{
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  color:var(--night);
+  box-shadow:0 16px 32px -16px var(--accent);
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 22px 40px -16px var(--accent); }
+.btn-ghost{ background:rgba(var(--ink-rgb),0.06); border-color:var(--line); color:var(--paper); }
+.btn-ghost:hover{ background:rgba(var(--ink-rgb),0.12); }
+.btn:disabled{ opacity:.4; cursor:not-allowed; transform:none; }
+
+/* preview */
+.preview-shell{ position:sticky; top:24px; }
+.preview-bar{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:12px; flex-wrap:wrap;
+}
+.preview-label{
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--dimmer); font-weight:800;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.live-dot{ width:7px; height:7px; border-radius:50%; background:var(--mint); box-shadow:0 0 0 0 var(--mint); animation:pulse 2s infinite; }
+@keyframes pulse{ 70%{ box-shadow:0 0 0 8px transparent; } 100%{ box-shadow:0 0 0 0 transparent; } }
+.card-frame{
+  border:1px solid var(--line); border-radius:var(--r-lg);
+  overflow:hidden; box-shadow:var(--shadow);
+  background:var(--night-2);
+  margin:0 auto; transition:max-width .3s var(--ease);
+}
+.card-frame.mobile{ max-width:380px; }
+iframe#previewFrame{ width:100%; height:620px; border:none; display:block; }
+@media (max-width:960px){
+  .preview-shell{ position:static; }
+  iframe#previewFrame{ height:520px; }
+}
+
+/* toast */
+#toast{
+  position:fixed; left:50%; bottom:26px; transform:translate(-50%, 24px);
+  background:var(--paper); color:var(--night);
+  font-size:13.5px; font-weight:800;
+  padding:12px 20px; border-radius:100px;
+  box-shadow:0 20px 40px -16px rgba(var(--shadow-rgb),.6);
+  opacity:0; pointer-events:none; transition:.28s var(--ease); z-index:99;
+}
+#toast.show{ opacity:1; transform:translate(-50%, 0); }
+
+/* drafts */
+.draft-row{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:10px 12px; border:1px solid var(--line); border-radius:var(--r-sm);
+  background:rgba(var(--ink-rgb),0.03); margin-bottom:8px; flex-wrap:wrap;
+}
+.draft-row:last-child{ margin-bottom:0; }
+.draft-name{ font-size:13px; font-weight:700; color:var(--dim); flex:1; min-width:0; }
+.draft-row .btn{ padding:7px 12px; font-size:12px; }
+
+.signature{
+  text-align:center; margin-top:74px; font-size:13px; color:var(--dimmer);
+}
+.signature b{ color:var(--gold); }
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation:none !important; transition:none !important; }
+}
+
+</style>
+</head>
+<body data-type="dogum" style="--accent:#FF6F59; --accent-2:#F3B94E;">
+<div class="wrap">
+  <header class="top">
+    <a href="index.html" class="brandmark"><span class="dot">✦</span> MuGöl <span style="color:var(--dimmer);font-weight:700">Kart Atölyesi</span></a>
+  </header>
+
+  <a href="index.html" class="back">← Tüm kart türleri</a>
+
+  <section class="hero">
+    <div class="pill">🎂 Doğum Günü</div>
+    <h1>Onun için bir <em>doğum günü kartı</em> hazırla.</h1>
+    <p class="lede">Bilgileri doldur, sağda kartın canlı halini gör. Beğendiğinde tek dosyalık bir tebrik indir ya da bağlantı olarak paylaş.</p>
+  </section>
+
+  <div class="layout">
+    <div>
+      <div class="panel" id="formPanel">
+        <h2><span class="num">1</span> Kime yazıyorsun?</h2>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="f-name">İsmi</label>
+            <input type="text" id="f-name" placeholder="Örn. Ayşe" maxlength="26">
+          </div>
+          <div class="field" id="extraFieldSlot"></div>
+        </div>
+
+        <div class="field">
+          <label for="f-relation">Sana kim oluyor<span class="opt">isteğe bağlı</span></label>
+          <input type="text" id="f-relation" placeholder="Örn. arkadaşım, kardeşim, sevgilim" maxlength="30">
+        </div>
+
+        <div class="field">
+          <label for="f-msg">Kısa mesajın <span class="opt counter" id="msgCounter">0/240</span></label>
+          <textarea id="f-msg" placeholder="Ona söylemek istediğin şeyi yaz..." maxlength="240"></textarea>
+          <div class="hint" style="margin-bottom:10px;">Fikrin yoksa hazır bir mesajla başla:</div>
+          <div class="chips" id="suggestions"></div>
+        </div>
+
+        <div class="field">
+          <label for="f-sender">İmzan<span class="opt">isteğe bağlı</span></label>
+          <input type="text" id="f-sender" placeholder="Örn. Mehmet" maxlength="26">
+        </div>
+
+        <div class="field">
+          <label>Fotoğraf<span class="opt">isteğe bağlı</span></label>
+          <div class="upload-box" id="uploadBox">
+            Bir fotoğraf seç veya buraya sürükle
+            <input type="file" id="f-photo" accept="image/*" aria-label="Fotoğraf yükle">
+          </div>
+          <div class="upload-preview" id="uploadPreview">
+            <img id="uploadPreviewImg" alt="Seçilen fotoğraf">
+            <button class="btn btn-ghost" id="clearPhotoBtn" disabled>Kaldır</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="num">2</span> Görünümü ayarla</h2>
+        <div class="field">
+          <label>Renk teması</label>
+          <div class="swatches" id="themeSwatches"></div>
+        </div>
+        <div class="field">
+          <label>Animasyon efekti</label>
+          <div class="chips" id="effectChips"></div>
+        </div>
+        <div class="field">
+          <label>Yazı tipi</label>
+          <div class="chips" id="fontChips"></div>
+        </div>
+        <div class="field">
+          <label>Çerçeve stili</label>
+          <div class="chips" id="frameChips"></div>
+        </div>
+        <div class="field">
+          <label>Kart oranı</label>
+          <div class="chips" id="ratioChips"></div>
+        </div>
+        <div class="field">
+          <label>Arka plan deseni</label>
+          <div class="chips" id="patternChips"></div>
+        </div>
+        <div class="field">
+          <label class="check-row">
+            <input type="checkbox" id="f-seal">
+            <span>Mühür / rozet ekle<span class="opt">isteğe bağlı</span></span>
+          </label>
+          <div class="chips" id="sealStyleChips" style="margin-top:10px;"></div>
+        </div>
+        <div class="field">
+          <label>Üst şerit kalınlığı</label>
+          <div class="chips" id="accentChips"></div>
+        </div>
+        <div class="field">
+          <label class="check-row">
+            <input type="checkbox" id="f-corners">
+            <span>Köşe süsü ekle<span class="opt">isteğe bağlı</span></span>
+          </label>
+        </div>
+        <div class="actions" style="margin-top:20px;">
+          <button class="btn btn-ghost" id="surpriseBtn">✨ Sürpriz yap</button>
+          <button class="btn btn-ghost" id="resetBtn">Formu temizle</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2><span class="num">3</span> Taslaklarım</h2>
+        <div class="actions" style="margin-bottom:16px;">
+          <button class="btn btn-ghost" id="saveDraftBtn">💾 Taslak olarak kaydet</button>
+        </div>
+        <div id="draftsList"></div>
+      </div>
+    </div>
+
+    <div class="preview-shell">
+      <div class="preview-bar">
+        <div class="preview-label"><span class="live-dot"></span> Canlı önizleme</div>
+        <div class="chips">
+          <button class="chip active" data-device="desktop">Geniş</button>
+          <button class="chip" data-device="mobile">Telefon</button>
+        </div>
+      </div>
+      <div class="card-frame" id="cardFrame">
+        <iframe id="previewFrame" title="Kart önizlemesi"></iframe>
+      </div>
+      <div class="panel" style="margin-top:18px;">
+        <h2><span class="num">4</span> Gönder</h2>
+        <div class="actions">
+          <button class="btn btn-primary" id="downloadBtn">⬇ Kartı indir</button>
+          <button class="btn btn-ghost" id="linkBtn">🔗 Bağlantıyı kopyala</button>
+          <button class="btn btn-ghost" id="waBtn">WhatsApp’tan gönder</button>
+          <button class="btn btn-ghost" id="printBtn">🖨 Yazdır / PDF</button>
+        </div>
+        <div class="hint">Bağlantı paylaşımında fotoğraf taşınmaz; fotoğraflı kart için indirilen dosyayı gönder. Yazdıklarını bu tarayıcıda otomatik kaydediyoruz.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="signature">Sevgiyle hazırlandı — <b>MuGöl</b></div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+/* MuGöl Kart Atölyesi — kart motoru (tip tanımları + kart üreteci) */
+
+window.MUGOL = (function () {
+  const THEMES = {
+    gece:    { label: 'Gece',      bg: '#12152B', card: '#1C2142', text: '#FFF9EE', a1: '#FF6F59', a2: '#F3B94E', soft: '#7FD8BE' },
+    kagit:   { label: 'Kağıt',     bg: '#FFF6E9', card: '#FFFFFF', text: '#241F33', a1: '#E4572E', a2: '#C99B2E', soft: '#3E8E7E' },
+    okyanus: { label: 'Okyanus',   bg: '#08243A', card: '#0E3350', text: '#EAF7FF', a1: '#4FC3E0', a2: '#7FD8BE', soft: '#B7E4F5' },
+    gul:     { label: 'Gül',       bg: '#2A1226', card: '#3A1A34', text: '#FFF0F6', a1: '#FF8FA8', a2: '#B08BEA', soft: '#FFD3E0' },
+    orman:   { label: 'Orman',     bg: '#0E1F17', card: '#152C21', text: '#EFFBF2', a1: '#7FD8BE', a2: '#C7E86A', soft: '#A9E5C6' },
+    altin:   { label: 'Altın',     bg: '#1A1408', card: '#261D0D', text: '#FFF6E0', a1: '#F3B94E', a2: '#FFE29A', soft: '#E8C87A' },
+    bulut:   { label: 'Bulut',     bg: '#F4F6FB', card: '#FFFFFF', text: '#2B2E42', a1: '#6C8CFF', a2: '#FFB4A2', soft: '#8FA6E8', light: true },
+    seftali: { label: 'Şeftali',   bg: '#FFF3EC', card: '#FFFFFF', text: '#3A2A24', a1: '#FF8A65', a2: '#FFC38B', soft: '#F2A488', light: true },
+    lavanta: { label: 'Lavanta',   bg: '#F5F1FC', card: '#FFFFFF', text: '#332B45', a1: '#9C7FE0', a2: '#F4A6C6', soft: '#B9A6E8', light: true },
+    naneli:  { label: 'Naneli',    bg: '#F0FAF4', card: '#FFFFFF', text: '#233A2E', a1: '#4FB88A', a2: '#8ED0A8', soft: '#6FC79E', light: true },
+    mercan:  { label: 'Mercan',    bg: '#2B0F14', card: '#3A161D', text: '#FFEFEC', a1: '#FF6B6B', a2: '#FFB199', soft: '#FF9E9E' },
+    indigo:  { label: 'İndigo',    bg: '#0D1030', card: '#161A45', text: '#EAEBFF', a1: '#7C8BFF', a2: '#C9A6FF', soft: '#9FB0FF' },
+    vanilya: { label: 'Vanilya',   bg: '#FBF7EE', card: '#FFFFFF', text: '#3B3226', a1: '#D9A441', a2: '#B98B5E', soft: '#E3C089', light: true }
+  };
+
+  const EFFECTS = {
+    konfeti: { label: 'Konfeti' },
+    kar:     { label: 'Kar' },
+    kalp:    { label: 'Kalp' },
+    yildiz:  { label: 'Yıldız' },
+    balon:   { label: 'Balon' },
+    yok:     { label: 'Efekt yok' }
+  };
+
+  const FONTS = {
+    nunito:  { label: 'Yuvarlak',  stack: "'Nunito', system-ui, sans-serif", url: 'family=Nunito:wght@400;600;700;800;900' },
+    serif:   { label: 'Zarif',     stack: "'Playfair Display', Georgia, serif", url: 'family=Playfair+Display:wght@500;700;800;900' },
+    yazi:    { label: 'El Yazısı', stack: "'Caveat', cursive", url: 'family=Caveat:wght@500;600;700' },
+    mono:    { label: 'Daktilo',   stack: "'Space Mono', monospace", url: 'family=Space+Mono:wght@400;700' }
+  };
+
+  const FRAMES = {
+    yumusak: { label: 'Yumuşak', radius: '30px', border: '1px' },
+    keskin:  { label: 'Keskin',  radius: '4px',  border: '1px' },
+    kalin:   { label: 'Kalın Çerçeve', radius: '22px', border: '3px' },
+    yuvarlak:{ label: 'Oval',    radius: '48px', border: '1px' },
+    cift:    { label: 'Çift Çizgi', radius: '18px', border: '1px', double: true },
+    noktali: { label: 'Noktalı Kenar', radius: '24px', border: '2px', dashed: true }
+  };
+
+  const RATIOS = {
+    kart:      { label: 'Kart',      maxWidth: '470px', aspect: '' },
+    kartpostal:{ label: 'Kartpostal',maxWidth: '520px', aspect: '4 / 3' },
+    kare:      { label: 'Kare',      maxWidth: '420px', aspect: '1 / 1' }
+  };
+
+  const PATTERNS = {
+    duz:    { label: 'Düz' },
+    noktalar:{ label: 'Noktalar' },
+    cizgiler:{ label: 'Çizgiler' },
+    daire:  { label: 'Daire Yaydı' }
+  };
+
+  const SEALS = {
+    emoji:  { label: 'Sembol' },
+    yildiz: { label: 'Yıldız', glyph: '✦' },
+    kalp:   { label: 'Kalp', glyph: '♥' },
+    yaprak: { label: 'Yaprak', glyph: '❁' }
+  };
+
+  function patternCss(pattern, th) {
+    const dotCol = th.text + '14';
+    const lineCol = th.text + '12';
+    switch (pattern) {
+      case 'noktalar':
+        return `background-image: radial-gradient(${dotCol} 1.6px, transparent 1.6px); background-size: 18px 18px;`;
+      case 'cizgiler':
+        return `background-image: repeating-linear-gradient(135deg, ${lineCol} 0 2px, transparent 2px 14px);`;
+      case 'daire':
+        return `background-image: radial-gradient(circle at 100% 0%, ${th.a1}1A, transparent 55%), radial-gradient(circle at 0% 100%, ${th.a2}1A, transparent 55%);`;
+      default:
+        return '';
+    }
+  }
+
+  const TYPES = {
+    dogum: {
+      slug: 'dogum',
+      emoji: '🎂',
+      name: 'Doğum Günü',
+      tag: 'Kutlama',
+      c1: '#FF6F59', c2: '#F3B94E',
+      title: 'Onun için bir <em>doğum günü kartı</em> hazırla.',
+      lede: 'Bilgileri doldur, sağda kartın canlı halini gör. Beğendiğinde tek dosyalık bir tebrik indir ya da bağlantı olarak paylaş.',
+      theme: 'gece', effect: 'konfeti',
+      showAge: true,
+      eyebrow: 'İyi ki doğdun',
+      heading: (d) => `Mutlu yıllar,<br><em>${d.name}</em>!`,
+      docTitle: (d) => `İyi ki doğdun, ${d.name}!`,
+      subline: (d) => d.age ? `Bugün itibariyle resmen <strong>${d.age}</strong> yaşındasın.` : 'Bugün tamamen senin günün.',
+      suggestions: [
+        'Nice mutlu, sağlıklı ve kahkahalı senelere. Seni çok seviyorum!',
+        'Bu yaşın sana hayalini kurduğun her şeyi getirmesini diliyorum.',
+        'Hayatımda olduğun için şanslıyım. İyi ki varsın, iyi ki doğdun!'
+      ]
+    },
+    yilbasi: {
+      slug: 'yilbasi',
+      emoji: '🎆',
+      name: 'Yılbaşı',
+      tag: 'Kutlama',
+      c1: '#4FC3E0', c2: '#7FD8BE',
+      title: 'Yeni yıla <em>güzel bir dilekle</em> gir.',
+      lede: 'Sevdiklerine yeni yıl dileğini gönder. Kartını canlı gör, indir ya da bağlantısını paylaş.',
+      theme: 'okyanus', effect: 'kar',
+      showYear: true,
+      eyebrow: 'Mutlu yıllar',
+      heading: (d) => `Yeni yılın kutlu olsun,<br><em>${d.name}</em>!`,
+      docTitle: (d) => `Yeni yılın kutlu olsun, ${d.name}!`,
+      subline: (d) => d.year ? `<strong>${d.year}</strong> sana yakışanı getirsin.` : 'Yeni yıl sana yakışanı getirsin.',
+      suggestions: [
+        'Yeni yılda sağlık, huzur ve bol kahkaha dilerim.',
+        'Bu yıl hayallerinin peşinden gitmen için tam zamanı. Mutlu yıllar!',
+        'Geçen yılın yorgunluğu geride kalsın, yenisi sana iyi gelsin.'
+      ]
+    },
+    gecmisolsun: {
+      slug: 'gecmisolsun',
+      emoji: '🌿',
+      name: 'Geçmiş Olsun',
+      tag: 'Destek',
+      c1: '#7FD8BE', c2: '#4FC3E0',
+      title: 'İyileşme sürecinde <em>yanında ol.</em>',
+      lede: 'Sıcak ve sade bir geçmiş olsun kartı hazırla, moral olsun.',
+      theme: 'orman', effect: 'yok',
+      eyebrow: 'Geçmiş olsun',
+      heading: (d) => `Geçmiş olsun,<br><em>${d.name}</em>.`,
+      docTitle: (d) => `Geçmiş olsun, ${d.name}`,
+      subline: () => 'Bir an önce eski enerjine kavuşmanı diliyorum.',
+      suggestions: [
+        'Acele etme, iyileşmek de bir iş. Buradayım, ihtiyacın olursa haber ver.',
+        'Yatağın en sıkıcı yer olduğunu biliyorum ama sabret, yakında ayaktasın.',
+        'Sağlığın her şeyden önemli. Kendine iyi bak, seni bekliyoruz.'
+      ]
+    },
+    basari: {
+      slug: 'basari',
+      emoji: '🏆',
+      name: 'Başarı Kutlama',
+      tag: 'Kutlama',
+      c1: '#F3B94E', c2: '#FF6F59',
+      title: 'Emeğinin karşılığını <em>tebrik et.</em>',
+      lede: 'Mezuniyet, yeni iş ya da sınav başarısı — hepsi için tebrik kartı.',
+      theme: 'altin', effect: 'yildiz',
+      showAchievement: true,
+      eyebrow: 'Tebrikler',
+      heading: (d) => `Tebrikler,<br><em>${d.name}</em>!`,
+      docTitle: (d) => `Tebrikler, ${d.name}!`,
+      subline: (d) => d.achievement ? `<strong>${d.achievement}</strong> — hak ettin.` : 'Bu başarıyı sonuna kadar hak ettin.',
+      suggestions: [
+        'Bu başarı tesadüf değil, emeğinin sonucu. Seninle gurur duyuyorum!',
+        'Daha nice başarıya. Bu daha başlangıç!',
+        'Ne kadar çalıştığını biliyorum. Sonunda oldu, tebrikler!'
+      ]
+    },
+    tesekkur: {
+      slug: 'tesekkur',
+      emoji: '💌',
+      name: 'Teşekkür',
+      tag: 'Nezaket',
+      c1: '#B08BEA', c2: '#FF8FA8',
+      title: 'Bir <em>teşekkür</em> her zaman iyi gelir.',
+      lede: 'Sana iyi davranan birine kısa ama içten bir teşekkür kartı bırak.',
+      theme: 'gul', effect: 'kalp',
+      showReason: true,
+      eyebrow: 'Teşekkürler',
+      heading: (d) => `Teşekkür ederim,<br><em>${d.name}</em>.`,
+      docTitle: (d) => `Teşekkürler, ${d.name}`,
+      subline: (d) => d.reason ? `${d.reason} için minnettarım.` : 'Yaptıkların için minnettarım.',
+      suggestions: [
+        'Yaptığın küçük şey benim için hiç de küçük değildi. Teşekkürler.',
+        'Bana ayırdığın zaman için gerçekten minnettarım.',
+        'İyi ki varsın. Bunu bilmeni istedim.'
+      ]
+    },
+    sevgi: {
+      slug: 'sevgi',
+      emoji: '💗',
+      name: 'Sevgi Kartı',
+      tag: 'Duygu',
+      c1: '#FF8FA8', c2: '#FF6F59',
+      title: 'Söylemeye çekindiğin şeyi <em>karta yaz.</em>',
+      lede: 'Sevgililer günü ya da sadece canın istediği için — küçük bir sevgi notu.',
+      theme: 'gul', effect: 'kalp',
+      eyebrow: 'Sana',
+      heading: (d) => `Seni düşündüm,<br><em>${d.name}</em>.`,
+      docTitle: (d) => `${d.name} için küçük bir not`,
+      subline: () => 'Bunu söylemek için özel bir gün gerekmiyordu.',
+      suggestions: [
+        'Gün içinde aklıma geldin ve gülümsedim. O kadar.',
+        'Seninle her şey daha kolay. Bunu bilmeni istedim.',
+        'Kelimeler biraz yetersiz ama deneyeyim: seni çok seviyorum.'
+      ]
+    }
+  };
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function effectScript(effect, theme) {
+    if (effect === 'yok') return '';
+    const shapes = {
+      konfeti: ['rect'],
+      kar: ['❄'],
+      kalp: ['♥'],
+      yildiz: ['✦', '★'],
+      balon: ['🎈']
+    }[effect] || ['rect'];
+    const colors = [theme.a1, theme.a2, theme.soft];
+    return `
+<canvas id="fx"></canvas>
+<script>
+(function(){
+  var c=document.getElementById('fx'), x=c.getContext('2d'), W,H;
+  function rs(){ W=c.width=innerWidth; H=c.height=innerHeight; } rs(); addEventListener('resize',rs);
+  var shapes=${JSON.stringify(shapes)}, cols=${JSON.stringify(colors)}, ps=[];
+  function mk(init){ return { x:Math.random()*W, y: init?Math.random()*H:-30, s:9+Math.random()*14,
+    col:cols[(Math.random()*cols.length)|0], sh:shapes[(Math.random()*shapes.length)|0],
+    vy:.35+Math.random()*.85, vx:-.35+Math.random()*.7, r:Math.random()*360, vr:-1.6+Math.random()*3.2, o:.45+Math.random()*.45 }; }
+  for(var i=0;i<34;i++) ps.push(mk(true));
+  function loop(){
+    x.clearRect(0,0,W,H);
+    for(var i=0;i<ps.length;i++){ var p=ps[i];
+      p.x+=p.vx; p.y+=p.vy; p.r+=p.vr;
+      if(p.y>H+40){ ps[i]=mk(false); continue; }
+      x.save(); x.translate(p.x,p.y); x.rotate(p.r*Math.PI/180); x.globalAlpha=p.o; x.fillStyle=p.col;
+      if(p.sh==='rect'){ x.fillRect(-p.s/4,-p.s/2,p.s/2,p.s); }
+      else { x.font=p.s+'px serif'; x.textAlign='center'; x.textBaseline='middle'; x.fillText(p.sh,0,0); }
+      x.restore();
+    }
+    requestAnimationFrame(loop);
+  }
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches) loop();
+})();
+<\/script>`;
+  }
+
+  /* Kartın tek dosyalık HTML çıktısı */
+  function buildCard(typeKey, data) {
+    const t = TYPES[typeKey];
+    const th = THEMES[data.theme] || THEMES[t.theme];
+    const fontKey = FONTS[data.font] ? data.font : 'nunito';
+    const font = FONTS[fontKey];
+    const frameKey = FRAMES[data.frame] ? data.frame : 'yumusak';
+    const frame = FRAMES[frameKey];
+    const ratioKey = RATIOS[data.ratio] ? data.ratio : 'kart';
+    const ratio = RATIOS[ratioKey];
+    const patternKey = PATTERNS[data.pattern] ? data.pattern : 'duz';
+    const sealKey = SEALS[data.sealStyle] ? data.sealStyle : 'emoji';
+    const borderStyle = frame.dashed ? 'dashed' : (frame.double ? 'double' : 'solid');
+    const borderWidth = frame.double ? '4px' : frame.border;
+    const shadowColor = th.light ? (th.text + '26') : 'rgba(0,0,0,.7)';
+    const d = {
+      name: esc((data.name || '').trim()) || 'Sevgili dostum',
+      age: esc((data.age || '').trim()),
+      year: esc((data.year || '').trim()),
+      achievement: esc((data.achievement || '').trim()),
+      reason: esc((data.reason || '').trim()),
+      relation: esc((data.relation || '').trim()),
+      msg: esc((data.msg || '').trim()),
+      sender: esc((data.sender || '').trim())
+    };
+
+    const photo = data.photo
+      ? `<div class="ph"><img src="${data.photo}" alt="${d.name}"></div>`
+      : '';
+    const rel = d.relation ? `<p class="rel">Sen benim ${d.relation}sın ve bunu söylemeden geçemezdim.</p>` : '';
+    const msg = d.msg ? `<p class="msg">“${d.msg.replace(/\n/g, '<br>')}”</p>` : '';
+    const sender = d.sender ? `<p class="sign">— ${d.sender}</p>` : '';
+    const sealGlyph = sealKey === 'emoji' ? (t.emoji || '✦') : SEALS[sealKey].glyph;
+    const seal = data.seal
+      ? `<div class="seal" aria-hidden="true"><span>${esc(sealGlyph)}</span></div>`
+      : '';
+
+    const corners = data.corners
+  ? `<span class="corner tl"></span><span class="corner br"></span>`
+  : '';
+return `<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${esc(t.docTitle(d))}</title>
+<meta name="description" content="${esc(t.docTitle(d))} — MuGöl Kart Atölyesi ile hazırlandı.">
+<meta property="og:title" content="${esc(t.docTitle(d))}">
+<meta property="og:description" content="MuGöl Kart Atölyesi ile hazırlanmış kişiye özel bir kart.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?${font.url}&display=swap" rel="stylesheet">
+<style>
+  *{ box-sizing:border-box; }
+  html,body{
+    margin:0; height:100vh; width:100vw; font-family:${font.stack};
+    background:
+      radial-gradient(700px 500px at 82% -5%, ${th.a2}26, transparent 60%),
+      radial-gradient(700px 500px at 5% 105%, ${th.soft}22, transparent 60%),
+      ${th.bg};
+    color:${th.text};
+    display:flex; align-items:center; justify-content:center;
+    padding:16px; overflow:hidden;
+  }
+  canvas#fx{ position:fixed; inset:0; pointer-events:none; z-index:1; }
+  .card{
+    position:relative; z-index:2; width:100%; max-width:${ratio.maxWidth};
+    max-height:100%; overflow-y:auto;
+    ${ratio.aspect ? `aspect-ratio:${ratio.aspect}; display:flex; flex-direction:column; justify-content:center;` : ''}
+    background:${th.card};
+    ${patternCss(patternKey, th)}
+    border:${borderWidth} ${borderStyle} ${th.text}${frame.dashed ? '4A' : (frame.double ? '33' : '1F')};
+    border-radius:${frame.radius}; padding:clamp(20px,4vh,42px) 34px;
+    text-align:center;
+    box-shadow:0 50px 110px -40px ${shadowColor}, inset 0 1px 0 ${th.light ? '#FFFFFF' : th.text + '14'};
+    animation:rise .8s cubic-bezier(.2,1.2,.4,1) both;
+  }
+  .card::after{
+    content:''; position:absolute; z-index:1; pointer-events:none;
+    top:14px; left:14px; right:14px; bottom:14px; border-radius:calc(${frame.radius} - 10px);
+    background:radial-gradient(420px 180px at 50% -10%, ${th.a2}12, transparent 70%);
+  }
+  .corner{
+    position:absolute; width:30px; height:30px; opacity:.55; pointer-events:none; z-index:3;
+  }
+  .corner.tl{ top:10px; left:10px; border-top:2px solid ${th.a1}; border-left:2px solid ${th.a1}; border-top-left-radius:10px; }
+  .corner.br{ bottom:10px; right:10px; border-bottom:2px solid ${th.a2}; border-right:2px solid ${th.a2}; border-bottom-right-radius:10px; }
+  .seal{
+    position:absolute; top:16px; right:16px; z-index:4;
+    width:38px; height:38px; border-radius:50%;
+    background:linear-gradient(135deg, ${th.a1}, ${th.a2});
+    display:grid; place-items:center; font-size:17px;
+    box-shadow:0 8px 18px -6px ${th.a1}80, inset 0 0 0 2px ${th.card}CC;
+  }
+  .card::before{
+    content:''; position:absolute; left:0; right:0; top:0; height:${data.accentWidth === 'ince' ? '3px' : data.accentWidth === 'kalin' ? '8px' : '5px'};
+    background:linear-gradient(90deg, ${th.a1}, ${th.a2}, ${th.soft});
+  }
+  @keyframes rise{ from{ opacity:0; transform:translateY(26px) scale(.97);} to{ opacity:1; transform:none;} }
+  .eyebrow{
+    font-size:11.5px; letter-spacing:.18em; text-transform:uppercase;
+    font-weight:900; color:${th.a2}; margin-bottom:18px;
+    display:flex; align-items:center; justify-content:center; gap:9px;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:''; height:1px; width:22px; background:${th.a2}55;
+  }
+  .ph{
+    width:118px; height:118px; border-radius:50%; overflow:hidden;
+    margin:0 auto 22px; border:3px solid ${th.a1};
+    box-shadow:0 18px 36px -18px ${th.a1};
+  }
+  .ph img{ width:100%; height:100%; object-fit:cover; display:block; }
+  h1{ font-weight:900; font-size:clamp(27px,6.4vw,36px); line-height:1.14; margin:0 0 14px; letter-spacing:-.02em; }
+  h1 em{ font-style:normal; color:${th.a1}; }
+  .sub{ font-size:15px; color:${th.text}B0; margin:0 0 6px; line-height:1.6; }
+  .rel{ font-size:13.5px; color:${th.text}80; margin:0 0 4px; line-height:1.6; }
+  .msg{
+    position:relative;
+    font-size:16px; font-style:italic; line-height:1.7; color:${th.soft};
+    margin:24px 0; padding:22px 8px;
+    border-top:1px solid ${th.text}1A; border-bottom:1px solid ${th.text}1A;
+  }
+  .msg::before{
+    content:'“'; position:absolute; top:2px; left:2px; font-size:34px; font-style:normal;
+    font-family:Georgia, serif; color:${th.a1}55; line-height:1;
+  }
+  .sign{ font-size:14px; font-weight:800; color:${th.a2}; margin:18px 0 0; }
+  .foot{
+    margin-top:26px; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:${th.text}59;
+  }
+  .foot a{ color:${th.a2}; text-decoration:none; font-weight:800; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; } }
+</style>
+</head>
+<body>
+${effectScript(data.effect || t.effect, th)}
+<div class="card">
+  ${corners}
+  ${seal}
+  <div class="eyebrow">${esc(t.eyebrow)}</div>
+  ${photo}
+  <h1>${t.heading(d)}</h1>
+  <p class="sub">${t.subline(d)}</p>
+  ${rel}
+  ${msg}
+  ${sender}
+  <div class="foot">MuGöl Kart Atölyesi</div>
+</div>
+</body>
+</html>`;
+  }
+
+  /* Paylaşılabilir bağlantı kodlaması (UTF-8 güvenli base64) */
+  function encode(obj) {
+    const json = JSON.stringify(obj);
+    const bytes = new TextEncoder().encode(json);
+    let bin = '';
+    bytes.forEach((b) => (bin += String.fromCharCode(b)));
+    return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function decode(str) {
+    try {
+      const b64 = str.replace(/-/g, '+').replace(/_/g, '/');
+      const bin = atob(b64);
+      const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+      return JSON.parse(new TextDecoder().decode(bytes));
+    } catch (e) { return null; }
+  }
+
+  return { THEMES, EFFECTS, FONTS, FRAMES, RATIOS, PATTERNS, SEALS, TYPES, buildCard, encode, decode, esc };
+})();
+
+</script>
+<script>
+/* MuGöl Kart Atölyesi — düzenleyici arayüzü */
+(function () {
+  const M = window.MUGOL;
+  const typeKey = document.body.dataset.type;
+  const T = M.TYPES[typeKey];
+
+  const state = {
+    theme: T.theme,
+    effect: T.effect,
+    font: 'nunito',
+    frame: 'yumusak',
+    ratio: 'kart',
+    pattern: 'duz',
+    seal: false,
+    sealStyle: 'emoji',
+    accentWidth: 'normal',
+    corners: false,
+    photo: null
+  };
+
+  const $ = (id) => document.getElementById(id);
+  const frame = $('previewFrame');
+
+  /* ---------- alan üretimi ---------- */
+  const extraField = () => {
+    if (T.showAge) return { id: 'age', label: 'Kaç yaşına giriyor', type: 'number', ph: 'Örn. 21' };
+    if (T.showYear) return { id: 'year', label: 'Hangi yıl', type: 'number', ph: String(new Date().getFullYear() + 1) };
+    if (T.showAchievement) return { id: 'achievement', label: 'Başarısı', type: 'text', ph: 'Örn. üniversite mezuniyeti' };
+    if (T.showReason) return { id: 'reason', label: 'Ne için teşekkür', type: 'text', ph: 'Örn. yanımda olduğun' };
+    return null;
+  };
+
+  const ex = extraField();
+  $('extraFieldSlot').innerHTML = ex
+    ? `<label for="f-${ex.id}">${ex.label}<span class="opt">isteğe bağlı</span></label>
+       <input type="${ex.type}" id="f-${ex.id}" placeholder="${ex.ph}" maxlength="40">`
+    : '';
+
+  /* ---------- tema & efekt ---------- */
+  const themeWrap = $('themeSwatches');
+  Object.entries(M.THEMES).forEach(([key, th]) => {
+    const b = document.createElement('button');
+    b.className = 'swatch' + (key === state.theme ? ' active' : '');
+    b.type = 'button';
+    b.title = th.label;
+    b.setAttribute('aria-label', th.label + ' teması');
+    b.style.background = th.bg;
+    b.innerHTML = `<i style="background:linear-gradient(135deg, ${th.a1}, ${th.a2})"></i>`;
+    b.onclick = () => {
+      state.theme = key;
+      [...themeWrap.children].forEach((c) => c.classList.remove('active'));
+      b.classList.add('active');
+      render();
+    };
+    themeWrap.appendChild(b);
+  });
+
+  const fxWrap = $('effectChips');
+  Object.entries(M.EFFECTS).forEach(([key, fx]) => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (key === state.effect ? ' active' : '');
+    b.type = 'button';
+    b.textContent = fx.label;
+    b.onclick = () => {
+      state.effect = key;
+      [...fxWrap.children].forEach((c) => c.classList.remove('active'));
+      b.classList.add('active');
+      render();
+    };
+    fxWrap.appendChild(b);
+  });
+
+  /* ---------- yazı tipi ---------- */
+  const fontWrap = $('fontChips');
+  if (fontWrap) {
+    Object.entries(M.FONTS).forEach(([key, f]) => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (key === state.font ? ' active' : '');
+      b.type = 'button';
+      b.textContent = f.label;
+      b.style.fontFamily = f.stack;
+      b.onclick = () => {
+        state.font = key;
+        [...fontWrap.children].forEach((c) => c.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      };
+      fontWrap.appendChild(b);
+    });
+  }
+
+  /* ---------- çerçeve stili ---------- */
+  const frameWrap = $('frameChips');
+  if (frameWrap) {
+    Object.entries(M.FRAMES).forEach(([key, fr]) => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (key === state.frame ? ' active' : '');
+      b.type = 'button';
+      b.textContent = fr.label;
+      b.onclick = () => {
+        state.frame = key;
+        [...frameWrap.children].forEach((c) => c.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      };
+      frameWrap.appendChild(b);
+    });
+  }
+
+  /* ---------- kart oranı ---------- */
+  const ratioWrap = $('ratioChips');
+  if (ratioWrap) {
+    Object.entries(M.RATIOS).forEach(([key, r]) => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (key === state.ratio ? ' active' : '');
+      b.type = 'button';
+      b.textContent = r.label;
+      b.onclick = () => {
+        state.ratio = key;
+        [...ratioWrap.children].forEach((c) => c.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      };
+      ratioWrap.appendChild(b);
+    });
+  }
+
+  /* ---------- arka plan deseni ---------- */
+  const patternWrap = $('patternChips');
+  if (patternWrap) {
+    Object.entries(M.PATTERNS).forEach(([key, p]) => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (key === state.pattern ? ' active' : '');
+      b.type = 'button';
+      b.textContent = p.label;
+      b.onclick = () => {
+        state.pattern = key;
+        [...patternWrap.children].forEach((c) => c.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      };
+      patternWrap.appendChild(b);
+    });
+  }
+
+  /* ---------- mühür ---------- */
+  const sealBox = $('f-seal');
+  if (sealBox) {
+    sealBox.onchange = () => {
+      state.seal = sealBox.checked;
+      render();
+    };
+  }
+
+  /* ---------- mühür şekli ---------- */
+  const sealStyleWrap = $('sealStyleChips');
+  if (sealStyleWrap) {
+    Object.entries(M.SEALS).forEach(([key, s]) => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (key === state.sealStyle ? ' active' : '');
+      b.type = 'button';
+      b.textContent = key === 'emoji' ? (T.emoji + ' Sembol') : (s.glyph + ' ' + s.label);
+      b.onclick = () => {
+        state.sealStyle = key;
+        [...sealStyleWrap.children].forEach((c) => c.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      };
+      sealStyleWrap.appendChild(b);
+    });
+  }
+
+  /* ---------- üst şerit kalınlığı ---------- */
+  const accentWrap = $('accentChips');
+  if (accentWrap) {
+    const accents = [['ince','İnce'], ['normal','Orta'], ['kalin','Kalın']];
+    accents.forEach(([key, label]) => {
+      const b = document.createElement('button');
+      b.className = 'chip' + (key === state.accentWidth ? ' active' : '');
+      b.type = 'button';
+      b.textContent = label;
+      b.onclick = () => {
+        state.accentWidth = key;
+        [...accentWrap.children].forEach((c) => c.classList.remove('active'));
+        b.classList.add('active');
+        render();
+      };
+      accentWrap.appendChild(b);
+    });
+  }
+
+  /* ---------- köşe süsü ---------- */
+  const cornersBox = $('f-corners');
+  if (cornersBox) {
+    cornersBox.onchange = () => {
+      state.corners = cornersBox.checked;
+      render();
+    };
+  }
+
+  /* ---------- hazır mesajlar ---------- */
+  const sugWrap = $('suggestions');
+  T.suggestions.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.className = 'chip';
+    b.type = 'button';
+    b.textContent = 'Öneri ' + (i + 1);
+    b.title = s;
+    b.onclick = () => {
+      $('f-msg').value = s;
+      updateCounter();
+      render();
+      toast('Hazır mesaj eklendi');
+    };
+    sugWrap.appendChild(b);
+  });
+
+  /* ---------- fotoğraf ---------- */
+  const box = $('uploadBox');
+  const photoInput = $('f-photo');
+  const prev = $('uploadPreview');
+  const prevImg = $('uploadPreviewImg');
+  const clearBtn = $('clearPhotoBtn');
+
+  function readPhoto(file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    if (file.size > 4 * 1024 * 1024) { toast('Fotoğraf 4 MB’tan küçük olmalı'); return; }
+    const r = new FileReader();
+    r.onload = (e) => {
+      state.photo = e.target.result;
+      prevImg.src = state.photo;
+      prev.classList.add('show');
+      clearBtn.disabled = false;
+      render();
+    };
+    r.readAsDataURL(file);
+  }
+  photoInput.addEventListener('change', (e) => readPhoto(e.target.files[0]));
+  ['dragenter', 'dragover'].forEach((ev) => box.addEventListener(ev, (e) => { e.preventDefault(); box.classList.add('drag'); }));
+  ['dragleave', 'drop'].forEach((ev) => box.addEventListener(ev, (e) => { e.preventDefault(); box.classList.remove('drag'); }));
+  box.addEventListener('drop', (e) => readPhoto(e.dataTransfer.files[0]));
+  clearBtn.addEventListener('click', () => {
+    state.photo = null; photoInput.value = ''; prev.classList.remove('show');
+    clearBtn.disabled = true; render();
+  });
+
+  /* ---------- karakter sayacı ---------- */
+  const msgEl = $('f-msg');
+  const counter = $('msgCounter');
+  function updateCounter() {
+    const n = msgEl.value.length;
+    counter.textContent = n + '/240';
+    counter.classList.toggle('warn', n > 220);
+  }
+
+  /* ---------- veri toplama ---------- */
+  function collect() {
+    const d = {
+      name: $('f-name').value,
+      relation: $('f-relation').value,
+      msg: msgEl.value,
+      sender: $('f-sender').value,
+      theme: state.theme,
+      effect: state.effect,
+      font: state.font,
+      frame: state.frame,
+      ratio: state.ratio,
+      pattern: state.pattern,
+      seal: state.seal,
+      sealStyle: state.sealStyle,
+      accentWidth: state.accentWidth,
+      corners: state.corners,
+      photo: state.photo
+    };
+    if (ex) d[ex.id] = ($('f-' + ex.id) || {}).value || '';
+    return d;
+  }
+
+  function apply(d) {
+    if (!d) return;
+    $('f-name').value = d.name || '';
+    $('f-relation').value = d.relation || '';
+    msgEl.value = d.msg || '';
+    $('f-sender').value = d.sender || '';
+    if (ex && $('f-' + ex.id)) $('f-' + ex.id).value = d[ex.id] || '';
+    if (d.theme && M.THEMES[d.theme]) {
+      state.theme = d.theme;
+      [...themeWrap.children].forEach((c, i) => c.classList.toggle('active', Object.keys(M.THEMES)[i] === d.theme));
+    }
+    if (d.effect && M.EFFECTS[d.effect]) {
+      state.effect = d.effect;
+      [...fxWrap.children].forEach((c, i) => c.classList.toggle('active', Object.keys(M.EFFECTS)[i] === d.effect));
+    }
+    if (d.font && M.FONTS[d.font] && fontWrap) {
+      state.font = d.font;
+      [...fontWrap.children].forEach((c, i) => c.classList.toggle('active', Object.keys(M.FONTS)[i] === d.font));
+    }
+    if (d.frame && M.FRAMES[d.frame] && frameWrap) {
+      state.frame = d.frame;
+      [...frameWrap.children].forEach((c, i) => c.classList.toggle('active', Object.keys(M.FRAMES)[i] === d.frame));
+    }
+    if (d.ratio && M.RATIOS[d.ratio] && ratioWrap) {
+      state.ratio = d.ratio;
+      [...ratioWrap.children].forEach((c, i) => c.classList.toggle('active', Object.keys(M.RATIOS)[i] === d.ratio));
+    }
+    if (d.pattern && M.PATTERNS[d.pattern] && patternWrap) {
+      state.pattern = d.pattern;
+      [...patternWrap.children].forEach((c, i) => c.classList.toggle('active', Object.keys(M.PATTERNS)[i] === d.pattern));
+    }
+    if (typeof d.seal === 'boolean' && sealBox) {
+      state.seal = d.seal;
+      sealBox.checked = d.seal;
+    }
+    if (d.sealStyle && M.SEALS[d.sealStyle] && sealStyleWrap) {
+      state.sealStyle = d.sealStyle;
+      [...sealStyleWrap.children].forEach((c, i) => c.classList.toggle('active', Object.keys(M.SEALS)[i] === d.sealStyle));
+    }
+    if (d.accentWidth && accentWrap) {
+      state.accentWidth = d.accentWidth;
+      const accentKeys = ['ince', 'normal', 'kalin'];
+      [...accentWrap.children].forEach((c, i) => c.classList.toggle('active', accentKeys[i] === d.accentWidth));
+    }
+    if (typeof d.corners === 'boolean' && cornersBox) {
+      state.corners = d.corners;
+      cornersBox.checked = d.corners;
+    }
+    if (d.photo) {
+      state.photo = d.photo; prevImg.src = d.photo;
+      prev.classList.add('show'); clearBtn.disabled = false;
+    }
+    updateCounter();
+  }
+
+  /* ---------- render ---------- */
+  let raf;
+  function render() {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      const html = M.buildCard(typeKey, collect());
+      frame.srcdoc = html;
+      try { localStorage.setItem('mugol:' + typeKey, JSON.stringify(collect())); } catch (e) {}
+    });
+  }
+
+  document.querySelectorAll('#formPanel input, #formPanel textarea').forEach((el) => {
+    el.addEventListener('input', () => { if (el === msgEl) updateCounter(); render(); });
+  });
+
+  /* ---------- önizleme cihaz görünümü ---------- */
+  document.querySelectorAll('[data-device]').forEach((b) => {
+    b.onclick = () => {
+      document.querySelectorAll('[data-device]').forEach((x) => x.classList.remove('active'));
+      b.classList.add('active');
+      $('cardFrame').classList.toggle('mobile', b.dataset.device === 'mobile');
+    };
+  });
+
+  /* ---------- aksiyonlar ---------- */
+  function toast(msg) {
+    const t = $('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._t);
+    t._t = setTimeout(() => t.classList.remove('show'), 2400);
+  }
+
+  $('downloadBtn').onclick = () => {
+    const html = M.buildCard(typeKey, collect());
+    const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+    const a = document.createElement('a');
+    const nm = ($('f-name').value.trim() || 'kart').toLowerCase().replace(/[^a-z0-9ığüşöç]+/gi, '-');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${typeKey}-${nm}.html`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    toast('Kart indirildi 🎉');
+  };
+
+  function shareUrl() {
+    const d = collect();
+    delete d.photo; // fotoğraf bağlantıya sığmaz
+    const base = location.href.replace(/[^/]*$/, '');
+    return base + 'kart.html?t=' + typeKey + '#' + M.encode(d);
+  }
+
+  $('linkBtn').onclick = async () => {
+    const url = shareUrl();
+    try {
+      await navigator.clipboard.writeText(url);
+      toast(state.photo ? 'Bağlantı kopyalandı (fotoğraf hariç)' : 'Bağlantı kopyalandı');
+    } catch (e) {
+      prompt('Bağlantıyı kopyala:', url);
+    }
+  };
+
+  $('waBtn').onclick = () => {
+    const name = $('f-name').value.trim();
+    const text = `${name ? name + ' için' : 'Sana'} bir kart hazırladım 💌 ${shareUrl()}`;
+    window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank', 'noopener');
+  };
+
+  $('printBtn').onclick = () => {
+    const w = window.open('', '_blank');
+    if (!w) { toast('Açılır pencereye izin ver'); return; }
+    w.document.write(M.buildCard(typeKey, collect()));
+    w.document.close();
+    setTimeout(() => w.print(), 700);
+  };
+
+  $('resetBtn').onclick = () => {
+    document.querySelectorAll('#formPanel input, #formPanel textarea').forEach((el) => (el.value = ''));
+    state.photo = null; photoInput.value = ''; prev.classList.remove('show'); clearBtn.disabled = true;
+    localStorage.removeItem('mugol:' + typeKey);
+    updateCounter(); render();
+    toast('Form temizlendi');
+  };
+
+  $('surpriseBtn').onclick = () => {
+    const themes = Object.keys(M.THEMES);
+    const fxs = Object.keys(M.EFFECTS).filter((k) => k !== 'yok');
+    const patterns = Object.keys(M.PATTERNS);
+    const frames = Object.keys(M.FRAMES);
+    const seals = Object.keys(M.SEALS);
+    apply(Object.assign(collect(), {
+      theme: themes[(Math.random() * themes.length) | 0],
+      effect: fxs[(Math.random() * fxs.length) | 0],
+      pattern: patterns[(Math.random() * patterns.length) | 0],
+      frame: frames[(Math.random() * frames.length) | 0],
+      sealStyle: seals[(Math.random() * seals.length) | 0],
+      msg: T.suggestions[(Math.random() * T.suggestions.length) | 0]
+    }));
+    render();
+    toast('Sürpriz kombinasyon ✨');
+  };
+
+  /* ---------- taslaklarım (çoklu kayıt) ---------- */
+  const DRAFTS_KEY = 'mugol:drafts:' + typeKey;
+  function getDrafts() {
+    try { return JSON.parse(localStorage.getItem(DRAFTS_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function setDrafts(list) {
+    try { localStorage.setItem(DRAFTS_KEY, JSON.stringify(list)); } catch (e) {}
+  }
+  function renderDrafts() {
+    const wrap = $('draftsList');
+    if (!wrap) return;
+    const drafts = getDrafts();
+    if (!drafts.length) {
+      wrap.innerHTML = '<div class="hint">Henüz kayıtlı taslak yok. Formu doldurup "Taslak olarak kaydet"e bas.</div>';
+      return;
+    }
+    wrap.innerHTML = '';
+    drafts.forEach((dr, i) => {
+      const row = document.createElement('div');
+      row.className = 'draft-row';
+      const label = (dr.data.name || 'İsimsiz') + (dr.savedAt ? ' · ' + dr.savedAt : '');
+      row.innerHTML = `<span class="draft-name">${M.esc(label)}</span>`;
+      const loadBtn = document.createElement('button');
+      loadBtn.className = 'btn btn-ghost'; loadBtn.type = 'button'; loadBtn.textContent = 'Yükle';
+      loadBtn.onclick = () => { apply(dr.data); render(); toast('Taslak yüklendi'); };
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn btn-ghost'; delBtn.type = 'button'; delBtn.textContent = 'Sil';
+      delBtn.onclick = () => {
+        const list = getDrafts(); list.splice(i, 1); setDrafts(list); renderDrafts(); toast('Taslak silindi');
+      };
+      row.appendChild(loadBtn); row.appendChild(delBtn);
+      wrap.appendChild(row);
+    });
+  }
+  const saveDraftBtn = $('saveDraftBtn');
+  if (saveDraftBtn) {
+    saveDraftBtn.onclick = () => {
+      const list = getDrafts();
+      const now = new Date();
+      const stamp = now.toLocaleDateString('tr-TR') + ' ' + now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+      list.unshift({ data: collect(), savedAt: stamp });
+      if (list.length > 12) list.length = 12;
+      setDrafts(list);
+      renderDrafts();
+      toast('Taslak kaydedildi 💾');
+    };
+  }
+  renderDrafts();
+
+  /* ---------- başlangıç ---------- */
+  let initial = null;
+  if (location.hash.length > 1) initial = M.decode(location.hash.slice(1));
+  if (!initial) {
+    try { initial = JSON.parse(localStorage.getItem('mugol:' + typeKey) || 'null'); } catch (e) {}
+  }
+  apply(initial);
+  updateCounter();
+  render();
+})();
+
+</script>
+</body>
+</html>
