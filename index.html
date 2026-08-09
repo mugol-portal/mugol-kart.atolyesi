@@ -191,7 +191,7 @@ a{ color:inherit; }
   flex:none;
 }
 .btn-install{
-  display:none; align-items:center; gap:9px;
+  display:inline-flex; align-items:center; gap:9px;
   font-family:inherit;
   font-size:12.5px; font-weight:800;
   letter-spacing:.02em;
@@ -202,7 +202,6 @@ a{ color:inherit; }
   box-shadow:0 14px 28px -12px rgba(183,64,42,.65);
   transition:.22s var(--ease);
 }
-.btn-install.show{ display:inline-flex; }
 .btn-install:hover{ background:#9c3521; border-color:#9c3521; transform:translateY(-2px); box-shadow:0 18px 32px -12px rgba(183,64,42,.75); }
 .btn-install .install-badge{
   width:27px; height:27px; border-radius:50%; display:grid; place-items:center;
@@ -703,28 +702,43 @@ iframe#previewFrame{ width:100%; height:620px; border:none; display:block; }
     });
   }
 
-  // "Uygulama indir" — tarayıcının PWA kurulum istemini yakala ve butonu göster
+  // "Uygulama indir" — buton her zaman görünür; tıklandığında mevcutsa
+  // tarayıcının PWA kurulum istemini açar, değilse bilgilendirici bir mesaj gösterir.
   const installBtn = document.getElementById('installBtn');
   let deferredInstallPrompt = null;
 
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredInstallPrompt = e;
-    if (installBtn) installBtn.classList.add('show');
   });
+
+  function isStandalone() {
+    return window.matchMedia('(display-mode: standalone)').matches
+      || window.navigator.standalone === true;
+  }
 
   if (installBtn) {
     installBtn.addEventListener('click', async () => {
-      if (!deferredInstallPrompt) return;
-      deferredInstallPrompt.prompt();
-      await deferredInstallPrompt.userChoice;
-      deferredInstallPrompt = null;
-      installBtn.classList.remove('show');
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        await deferredInstallPrompt.userChoice;
+        deferredInstallPrompt = null;
+        return;
+      }
+      if (isStandalone()) {
+        alert('Uygulama zaten yüklü — ana ekranından açabilirsin.');
+        return;
+      }
+      const ua = navigator.userAgent || '';
+      if (/iphone|ipad|ipod/i.test(ua)) {
+        alert('iPhone/iPad’de kurmak için: Paylaş düğmesine dokun, ardından “Ana Ekrana Ekle”yi seç.');
+      } else {
+        alert('Bu tarayıcıda otomatik kurulum henüz sunulmadı. Tarayıcı menüsünden “Ana ekrana ekle” veya “Uygulamayı yükle” seçeneğini kullanabilirsin.');
+      }
     });
   }
 
   window.addEventListener('appinstalled', () => {
-    if (installBtn) installBtn.classList.remove('show');
     deferredInstallPrompt = null;
   });
 </script>
