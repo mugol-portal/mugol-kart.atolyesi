@@ -580,11 +580,9 @@ iframe#previewFrame{ width:100%; height:620px; border:none; display:block; }
         <h2><span class="num">4</span> Gönder</h2>
         <div class="actions">
           <button class="btn btn-primary" id="downloadBtn">⬇ Kartı indir</button>
-          <button class="btn btn-ghost" id="linkBtn">🔗 Bağlantıyı kopyala</button>
-          <button class="btn btn-ghost" id="waBtn">WhatsApp’tan gönder</button>
-          <button class="btn btn-ghost" id="printBtn">🖨 Yazdır / PDF</button>
+          <button class="btn btn-ghost" id="waBtn">Paylaş</button>
         </div>
-        <div class="hint">Bağlantı paylaşımında fotoğraf taşınmaz; fotoğraflı kart için indirilen dosyayı gönder. Yazdıklarını bu tarayıcıda otomatik kaydediyoruz.</div>
+        <div class="hint">Fotoğraflı kartı paylaşırken taşınmayabilir; gerekirse indirilen dosyayı gönder. Yazdıklarını bu tarayıcıda otomatik kaydediyoruz.</div>
       </div>
     </div>
   </div>
@@ -1614,16 +1612,6 @@ ${effectScript((data.effects && data.effects.length ? data.effects : [t.effect])
     return base + 'kart.html?t=' + typeKey + '#' + M.encode(d);
   }
 
-  $('linkBtn').onclick = async () => {
-    const url = shareUrl();
-    try {
-      await navigator.clipboard.writeText(url);
-      toast(state.photo ? 'Bağlantı kopyalandı (fotoğraf hariç)' : 'Bağlantı kopyalandı');
-    } catch (e) {
-      prompt('Bağlantıyı kopyala:', url);
-    }
-  };
-
   $('waBtn').onclick = async () => {
     const name = $('f-name').value.trim();
     const text = `${name ? name + ' için' : 'Sana'} bir kart hazırladım 💌`;
@@ -1647,14 +1635,6 @@ ${effectScript((data.effects && data.effects.length ? data.effects : [t.effect])
     // Desteklemeyen cihazlarda (çoğunlukla masaüstü): eski bağlantı yöntemi
     const fallbackText = `${text} ${shareUrl()}`;
     window.open('https://wa.me/?text=' + encodeURIComponent(fallbackText), '_blank', 'noopener');
-  };
-
-  $('printBtn').onclick = () => {
-    const w = window.open('', '_blank');
-    if (!w) { toast('Açılır pencereye izin ver'); return; }
-    w.document.write(M.buildCard(typeKey, collect()));
-    w.document.close();
-    setTimeout(() => w.print(), 700);
   };
 
   $('resetBtn').onclick = () => {
