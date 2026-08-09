@@ -1,0 +1,26 @@
+{
+  "name": "MuGöl Kart Atölyesi",
+  "short_name": "MuGöl Kart",
+  "description": "Doğum günü, yeni yıl, teşekkür ve daha fazlası için saniyeler içinde kişiye özel dijital tebrik kartı hazırla, indir ve paylaş.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FBF6EC",
+  "theme_color": "#22233A",
+  "lang": "tr",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "1251x1251",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "1251x1251",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
